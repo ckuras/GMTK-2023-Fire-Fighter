@@ -173,5 +173,6 @@ func _unhandled_input(event):
 			if !previous_clicked and event.is_pressed():
 				previous_clicked = true
 				game_state.player_tile_id = tile_id
+				EventBus.emit_signal("turn_ended")
 			if previous_clicked and !event.is_pressed():
 				previous_clicked = false

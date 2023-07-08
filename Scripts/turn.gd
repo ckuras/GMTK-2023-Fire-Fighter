@@ -7,4 +7,4 @@ signal completed
 
 func play_turn():
 	# do stuff
-	return completed
+	emit_signal("completed")
