@@ -29,6 +29,7 @@ tile_id = 2
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(-32, -16)
 tile_id = 2
+tile_state = 2
 
 [node name="Tile4" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 tile_id = 3
