@@ -24,6 +24,7 @@ const TILE_SIZE = Vector2i(32,16)
 
 @export var can_player_reach = false
 @export var has_player = false
+@export var is_flammable = true
 @export var tile_id: int
 @export var tile_state = TileState.None
 
@@ -142,9 +143,10 @@ func spread_to_neighbors():
 		if tile.tile_state != TileState.Fire:
 			tile.emit_signal("change_tile_state", tile_state)
 
-# --- Mouse events and state ---
+# Mouse events and state ---------------------------------------------------------------------------
 
-var previous_clicked = false
+var previous_left_clicked = false
+var previous_right_clicked = false
 var mouse_over = false
 
 func _on_mouse_entered():
@@ -159,23 +161,71 @@ func _on_mouse_exited():
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		handle_mouse_click(event)
+		handle_mouse_event(event)
 
-func handle_mouse_click(event: InputEventMouseButton):
-	var is_clicking_on_current_tile = mouse_over and event.button_index == MOUSE_BUTTON_LEFT
-	var can_player_move_and_reach_this_tile = game_state.player_moves_remaining > 0 and can_player_reach
-	var is_player_turn = game_state.active_turn == game_state.Turn.Player
+# There are four combinations here: left down, left up, right down, right up.
+func handle_mouse_event(event: InputEventMouseButton):
+	var previous_clicked = previous_left_clicked or previous_right_clicked
 	var is_mouse_down = !previous_clicked and event.is_pressed()
 	var is_mouse_up = previous_clicked and !event.is_pressed()
-	var can_move_to_tile = can_player_move_and_reach_this_tile and is_mouse_down and is_player_turn
 	
-	if is_clicking_on_current_tile and can_move_to_tile:
-		move_player_to_tile()
-	if !is_clicking_on_current_tile and is_mouse_up:
-		previous_clicked = false
+	var is_left_event = event.button_index == MOUSE_BUTTON_LEFT
+	var is_left_event_on_this_tile = mouse_over and is_left_event
+	var is_right_event = event.button_index == MOUSE_BUTTON_RIGHT
+	var is_right_event_on_this_tile = mouse_over and is_right_event
+	
+	var is_left_clicking_on_current_tile = is_mouse_down and is_left_event_on_this_tile
+	var is_right_clicking_on_current_tile = is_mouse_down and is_right_event_on_this_tile
+	var is_left_releasing = is_mouse_up and is_left_event
+	var is_right_releasing = is_mouse_up and is_right_event
+	
+	if (is_left_clicking_on_current_tile):
+		handle_left_mouse_down(event)
+	if (is_left_releasing):
+		handle_left_mouse_up()
+	if (is_right_clicking_on_current_tile):
+		handle_right_mouse_down(event)
+	if (is_right_releasing):
+		handle_right_mouse_up()
+	
+func handle_left_mouse_down(event: InputEventMouseButton):
+	print("caught left click on tile ", tile_id)
+	
+	var can_player_move = game_state.player_moves_remaining > 0
+	var can_player_reach_this_tile = can_player_reach
+	var is_player_turn = game_state.active_turn == game_state.Turn.Player
+	var can_move_to_tile = can_player_move and can_player_reach_this_tile and is_player_turn
+	
+	if can_move_to_tile: move_player_to_tile()
+	
+	previous_left_clicked = true
+
+func handle_left_mouse_up():
+	print("caught left release on tile ", tile_id)
+	
+	previous_left_clicked = false
+
+func handle_right_mouse_down(event: InputEventMouseButton):
+	print("caught right click on tile ", tile_id)
+	
+	var is_within_player_range = false
+	for tile in get_all_neighbors():
+		if tile.has_player:
+			is_within_player_range = true
+	
+	var can_be_lit_on_fire = is_within_player_range and is_flammable
+
+	if can_be_lit_on_fire:
+		emit_signal("change_tile_state", TileState.Fire)
+	
+	previous_right_clicked = true
+
+func handle_right_mouse_up():
+	print("caught right release on tile ", tile_id)
+	
+	previous_right_clicked = false
 
 func move_player_to_tile():
-	previous_clicked = true
 	game_state.player_tile_id = tile_id
 	if game_state.player_moves_remaining == 1:
 		EventBus.emit_signal("turn_ended")
