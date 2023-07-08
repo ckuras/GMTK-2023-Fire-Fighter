@@ -12,6 +12,7 @@ script = ExtResource("1_ut173")
 script = ExtResource("2_kccow")
 
 [node name="Tile" parent="Tiles" instance=ExtResource("1_kkxld")]
+has_player = true
 tile_state = 1
 
 [node name="Tile2" parent="Tiles" instance=ExtResource("1_kkxld")]
@@ -24,7 +25,6 @@ tile_id = 2
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 16)
-has_player = true
 tile_id = 3
 
 [node name="Tile5" parent="Tiles" instance=ExtResource("1_kkxld")]

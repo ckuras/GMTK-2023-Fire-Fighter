@@ -1,6 +1,7 @@
 class_name Tile extends Node2D
 
 signal change_tile_state(state: Tile.TileState)
+signal change_can_player_reach(reachable: bool)
 
 enum TileState {
 	None,
@@ -21,6 +22,7 @@ enum Direction {
 
 const TILE_SIZE = Vector2i(32,16)
 
+@export var can_player_reach = false
 @export var has_player = false
 @export var tile_id: int
 @export var tile_state = TileState.None
@@ -36,6 +38,7 @@ func initialize(_game_state: GameState):
 
 func _ready(): 
 	change_tile_state.connect(_on_state_change)
+	change_can_player_reach.connect(_on_can_player_reach_change)
 	emit_signal("change_tile_state", tile_state)
 
 func tile_state_to_string(tile_state: TileState):
@@ -50,13 +53,37 @@ func _on_state_change(_tile_state: TileState):
 		1: modulate = Color.RED
 		2: modulate = Color.WEB_PURPLE
 
-func _on_player_tile_id_set(player_tile_id):
-	if player_tile_id == tile_id:
-		has_player = true
-		$Player.show()
+func _on_can_player_reach_change(_can_player_reach):
+	can_player_reach = _can_player_reach
+	if can_player_reach:
+		$Reachable.show()
 	else:
+		$Reachable.hide()
+
+func _on_player_tile_id_set(player_tile_id):
+	# If player is on this tile
+	if player_tile_id == tile_id:
+		# Update our state to know that we have the player
+		has_player = true
+		
+		# Visually display the player sprite
+		$Player.show()
+		
+		# Reset all tiles to not be reachable. This must happen before setting the new neighbors to
+		# be reachable because its previous neighbors need to be updated somehow.
+		for tile in get_parent().get_children():
+			tile.emit_signal("change_can_player_reach", false)
+		
+		# Tell all neighbor tiles whether or not they are reachable
+		for tile in get_all_neighbors():
+			tile.emit_signal("change_can_player_reach", tile.tile_state == TileState.None)
+		
+	else:
+		# Update our state to know that we no longer have the player
 		has_player = false
-		$Player.hide()
+		
+		# Visually hide the player sprite
+		$Player.hide()	
 
 func get_all_neighbors_include_nulls() -> Array[Tile]:
 	return [
@@ -94,13 +121,24 @@ func get_cardinal_neighbors():
 
 func get_neighbor_by_direction(direction: Direction):
 	ray_cast.target_position = get_target_by_direction(direction)
+	print("casting ray ", direction, " to ", get_target_by_direction(direction))
 	ray_cast.force_raycast_update()
+	if ray_cast.get_collider() != null:
+		print("hit ", ray_cast.get_collider().tile_id)
 	return ray_cast.get_collider()
 
 func get_target_by_direction(direction: Direction):
 	match direction:
+		Direction.N:
+			return Vector2(0, -16)
+		Direction.E:
+			return Vector2(32, 0)
+		Direction.S:
+			return Vector2(0, 16)
+		Direction.W:
+			return Vector2(-32, 0)
 		Direction.NE:
-			return Vector2(16,-8)
+			return Vector2(16, -8)
 		Direction.NW:
 			return Vector2(-16, -8)	
 		Direction.SE:
