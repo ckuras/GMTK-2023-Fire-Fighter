@@ -60,6 +60,7 @@ func _on_can_player_reach_change(_can_player_reach):
 	else:
 		$Reachable.hide()
 
+# Called when the player just moved
 func _on_player_tile_id_set(player_tile_id):
 	# If player is on this tile
 	if player_tile_id == tile_id:
@@ -121,10 +122,7 @@ func get_cardinal_neighbors():
 
 func get_neighbor_by_direction(direction: Direction):
 	ray_cast.target_position = get_target_by_direction(direction)
-	print("casting ray ", direction, " to ", get_target_by_direction(direction))
 	ray_cast.force_raycast_update()
-	if ray_cast.get_collider() != null:
-		print("hit ", ray_cast.get_collider().tile_id)
 	return ray_cast.get_collider()
 
 func get_target_by_direction(direction: Direction):
@@ -170,9 +168,11 @@ func _on_mouse_exited():
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if mouse_over and event.button_index == MOUSE_BUTTON_LEFT:
-			if !previous_clicked and event.is_pressed():
+			if game_state.player_moves_remaining > 0 and can_player_reach and !previous_clicked and event.is_pressed():
 				previous_clicked = true
 				game_state.player_tile_id = tile_id
-				EventBus.emit_signal("turn_ended")
+				if game_state.player_moves_remaining == 1:
+					EventBus.emit_signal("turn_ended")
+				game_state.player_moves_remaining -= 1
 			if previous_clicked and !event.is_pressed():
 				previous_clicked = false
