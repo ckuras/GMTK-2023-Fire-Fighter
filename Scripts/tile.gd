@@ -31,23 +31,9 @@ func _set_has_player(_has_player):
 @onready var sprite: Sprite2D = $Sprite
 @onready var ray_cast: RayCast2D = $RayCast2D
 
-var previous_clicked = false
-var mouse_over = false
-
 func _ready(): 
 	change_state.connect(_on_state_change)
 	emit_signal("change_state", state)
-
-# on click handler
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if mouse_over and event.button_index == MOUSE_BUTTON_LEFT:
-			if !previous_clicked and event.is_pressed():
-				previous_clicked = true
-				print("caught first click")
-			if previous_clicked and !event.is_pressed():
-				previous_clicked = false
-				print("caught unpress")
 
 func tile_state_to_string(tile_state: TileState):
 	match tile_state:
@@ -96,6 +82,11 @@ func spread_to_neighbors():
 	for tile in neighbors:
 		tile.emit_signal("change_state", state)
 
+# --- Mouse events and state ---
+
+var previous_clicked = false
+var mouse_over = false
+
 func _on_mouse_entered():
 	print("mouse entered: ", tile_id)
 	mouse_over = true
@@ -103,3 +94,13 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	print("mouse exited: ", tile_id)
 	mouse_over = false
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if mouse_over and event.button_index == MOUSE_BUTTON_LEFT:
+			if !previous_clicked and event.is_pressed():
+				previous_clicked = true
+				print("caught first click")
+			if previous_clicked and !event.is_pressed():
+				previous_clicked = false
+				print("caught unpress")
