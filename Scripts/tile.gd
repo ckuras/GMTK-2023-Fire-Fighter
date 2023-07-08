@@ -16,6 +16,15 @@ enum Direction {
 
 const TILE_SIZE = Vector2i(32,16)
 
+@export var has_player = false : set = _set_has_player
+
+func _set_has_player(_has_player):
+	has_player = _has_player
+	if has_player:
+		$Player.show()
+	else:
+		$Player.hide() 
+
 @export var tile_id = 0
 @export var state = TileState.None
 
@@ -51,7 +60,6 @@ func get_neighbors():
 		func(t): return t != null
 	))
 	return not_null_neighbors
-	
 
 func get_neighbor_by_direction(direction: Direction):
 	ray_cast.target_position = get_target_by_direction(direction)

@@ -22,4 +22,5 @@ tile_id = 2
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 16)
+has_player = true
 tile_id = 3
