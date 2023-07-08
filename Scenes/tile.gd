@@ -1,4 +1,4 @@
-extends Node2D
+class_name Tile extends Node2D
 
 enum TileState {
 	None,
@@ -23,7 +23,7 @@ const TILE_SIZE = Vector2i(32,16)
 func _ready(): 
 	tile_debug()
 	sprite.modulate = state_to_modulate(state)
-	get_neighbor(Direction.NE)
+	print(get_neighbors())
 	
 func tile_state_to_string(tile_state: TileState):
 	match tile_state:
@@ -38,15 +38,28 @@ func state_to_modulate(tile_state: TileState):
 func tile_debug():
 	print("Tile ID: ", tile_id)
 	print(tile_state_to_string(state))
-	print("")
 
-func get_neighbor(direction: Direction):
+func get_neighbors() -> Array[Tile]:
+	return [
+		get_neighbor_by_direction(Direction.NE),
+		get_neighbor_by_direction(Direction.NW),
+		get_neighbor_by_direction(Direction.SE),
+		get_neighbor_by_direction(Direction.SW)
+	]
+
+func get_neighbor_by_direction(direction: Direction):
+	ray_cast.target_position = get_target_by_direction(direction)
+	ray_cast.force_raycast_update()
+	return ray_cast.get_collider()
+
+func get_target_by_direction(direction: Direction):
 	match direction:
 		Direction.NE:
-			ray_cast.target_position = Vector2(16,-8)
-			ray_cast.enabled = true
-			ray_cast.force_raycast_update()
-			var neighbor = ray_cast.get_collider()
-			print(neighbor)
-			
+			return Vector2(16,-8)
+		Direction.NW:
+			return Vector2(-16, -8)	
+		Direction.SE:
+			return Vector2(16, 8)
+		Direction.SW:
+			return Vector2(-16, 8)	
 	

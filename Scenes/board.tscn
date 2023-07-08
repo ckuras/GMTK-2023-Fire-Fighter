@@ -12,9 +12,12 @@ state = 1
 
 [node name="Tile2" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(16, 8)
+tile_id = 1
 
 [node name="Tile3" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(-16, 8)
+tile_id = 2
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 16)
+tile_id = 3
