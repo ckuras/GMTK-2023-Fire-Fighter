@@ -1,6 +1,6 @@
 class_name Tile extends Node2D
 
-signal change_state(state: Tile.TileState)
+signal change_tile_state(state: Tile.TileState)
 
 enum TileState {
 	None,
@@ -18,7 +18,7 @@ const TILE_SIZE = Vector2i(32,16)
 
 @export var has_player = false
 @export var tile_id = 0
-@export var state = TileState.None
+@export var tile_state = TileState.None
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var ray_cast: RayCast2D = $RayCast2D
@@ -30,16 +30,16 @@ func initialize(_game_state: Node):
 	game_state.player_tile_id_set.connect(_on_player_tile_id_set)
 
 func _ready(): 
-	change_state.connect(_on_state_change)
-	emit_signal("change_state", state)
+	change_tile_state.connect(_on_state_change)
+	emit_signal("change_tile_state", tile_state)
 
 func tile_state_to_string(tile_state: TileState):
 	match tile_state:
 		0: return "None"
 		1: return "Fire"
 
-func _on_state_change(tile_state: TileState):
-	state = tile_state
+func _on_state_change(_tile_state: TileState):
+	tile_state = _tile_state
 	match tile_state:
 		0: pass
 		1: modulate = Color.RED
@@ -86,7 +86,7 @@ func get_target_by_direction(direction: Direction):
 func spread_to_neighbors():
 	var neighbors: Array[Tile] = get_neighbors()
 	for tile in neighbors:
-		tile.emit_signal("change_state", state)
+		tile.emit_signal("change_tile_state", tile_state)
 
 # --- Mouse events and state ---
 
@@ -94,13 +94,11 @@ var previous_clicked = false
 var mouse_over = false
 
 func _on_mouse_entered():
-	print("mouse entered: ", tile_id)
 	mouse_over = true
 	if game_state.active_turn == game_state.Turn.Player:
 		$Hover.show()
 
 func _on_mouse_exited():
-	print("mouse exited: ", tile_id)
 	mouse_over = false
 	if game_state.active_turn == game_state.Turn.Player:
 		$Hover.hide()
@@ -111,7 +109,5 @@ func _unhandled_input(event):
 			if !previous_clicked and event.is_pressed():
 				previous_clicked = true
 				game_state.player_tile_id = tile_id
-				print("caught first click")
 			if previous_clicked and !event.is_pressed():
 				previous_clicked = false
-				print("caught unpress")
