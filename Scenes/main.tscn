@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://gf6w34qsgq1w"]
+[gd_scene load_steps=4 format=3 uid="uid://gf6w34qsgq1w"]
 
 [ext_resource type="PackedScene" uid="uid://cmvhuo1g7sssa" path="res://Scenes/board.tscn" id="1_utpif"]
+[ext_resource type="Script" path="res://Scripts/TurnQueue.gd" id="2_2anat"]
+[ext_resource type="Script" path="res://Scripts/fire.gd" id="3_uvgc1"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Board" parent="." instance=ExtResource("1_utpif")]
+
+[node name="TurnQueue" type="Node" parent="."]
+script = ExtResource("2_2anat")
+board = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":true,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":Resource("res://Scripts/board.gd"))
+
+
+[node name="Fire" type="Node" parent="TurnQueue"]
+script = ExtResource("3_uvgc1")
