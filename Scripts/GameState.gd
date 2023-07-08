@@ -10,7 +10,6 @@ enum Turn {
 }
 
 var active_turn = Turn.Player
-var are_tiles_initialized = false
 
 @onready var player_tile_id = 4 : set = _set_player_tile_id
 @onready var player_moves_remaining = 2 : set = _set_player_moves_remaining

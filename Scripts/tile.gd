@@ -55,10 +55,11 @@ func _on_state_change(_tile_state: TileState):
 
 func _on_can_player_reach_change(_can_player_reach):
 	can_player_reach = _can_player_reach
-	if can_player_reach and game_state.active_turn == game_state.Turn.Player:
+	if can_player_reach:
 		$Reachable.show()
 	else:
 		$Reachable.hide()
+		$Hover.hide()
 
 # Called when the player just moved
 func _on_player_tile_id_set(player_tile_id):
