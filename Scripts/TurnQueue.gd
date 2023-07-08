@@ -17,9 +17,11 @@ func play_active_turn():
 	
 	if did_player_win():
 		print("The player won")
+		await get_tree().create_timer(1.0).timeout
 		EventBus.emit_signal("player_won_round")
 	elif did_player_lose():
 		print("Player lost, we should restart the level from the top")
+		await get_tree().create_timer(1.0).timeout
 		EventBus.emit_signal("player_lost_round")
 	else:
 		print("Didn't win, didn't lose, keep it rolling")
