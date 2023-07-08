@@ -14,6 +14,12 @@ script = ExtResource("1_ulwfg")
 position = Vector2(0, 8)
 texture = ExtResource("1_bxljw")
 
+[node name="Hover" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.501961, 0, 1)
+position = Vector2(0, 8)
+texture = ExtResource("1_bxljw")
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
 collide_with_areas = true

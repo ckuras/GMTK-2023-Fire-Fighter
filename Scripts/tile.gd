@@ -23,7 +23,7 @@ func _set_has_player(_has_player):
 	if has_player:
 		$Player.show()
 	else:
-		$Player.hide() 
+		$Player.hide()
 
 @export var tile_id = 0
 @export var state = TileState.None
@@ -90,10 +90,12 @@ var mouse_over = false
 func _on_mouse_entered():
 	print("mouse entered: ", tile_id)
 	mouse_over = true
+	$Hover.show()
 
 func _on_mouse_exited():
 	print("mouse exited: ", tile_id)
 	mouse_over = false
+	$Hover.hide()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
