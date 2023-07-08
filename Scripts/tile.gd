@@ -226,7 +226,14 @@ func is_player_within_cardinal_neighbors():
 	return false
 
 func move_player_to_tile():
+	set_sprite_direction()
 	game_state.player_tile_name = self.name
 	if game_state.player_moves_remaining == 1:
 		EventBus.emit_signal("turn_ended")
 	game_state.player_moves_remaining -= 1
+
+func set_sprite_direction():
+	var current_player_tile = get_parent().find_child(game_state.player_tile_name)
+	var neighbors: Array[Tile] = get_cardinal_neighbors_include_nulls()
+	var tile_index = neighbors.find(current_player_tile)
+	print("tile we just moved from", neighbors[tile_index])
