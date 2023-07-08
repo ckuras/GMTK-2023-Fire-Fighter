@@ -40,6 +40,7 @@ tile_id = 3
 
 [node name="Tile9" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(32, 16)
+has_player = true
 tile_id = 3
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("2_p06tp")]

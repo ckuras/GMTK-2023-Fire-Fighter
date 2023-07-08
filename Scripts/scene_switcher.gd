@@ -28,3 +28,6 @@ func _unhandled_input(event):
 		if was_space_pressed:
 			EventBus.emit_signal("turn_ended")
 			pass
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
