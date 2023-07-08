@@ -1,5 +1,6 @@
 class_name GameState extends Node
 
+signal game_state_initialized
 signal player_tile_id_set(_player_tile_id)
 
 enum Turn {
@@ -9,6 +10,7 @@ enum Turn {
 }
 
 var active_turn = Turn.Player
+var are_tiles_initialized = false
 
 @onready var player_tile_id = 4 : set = _set_player_tile_id
 @onready var player_moves_remaining = 2 : set = _set_player_moves_remaining
@@ -16,6 +18,7 @@ var active_turn = Turn.Player
 func _ready():
 	self.player_tile_id = 4
 	self.player_moves_remaining = 2
+	emit_signal("game_state_initialized")
 
 func _set_player_tile_id(_player_tile_id):
 	player_tile_id = _player_tile_id

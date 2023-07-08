@@ -55,13 +55,14 @@ func _on_state_change(_tile_state: TileState):
 
 func _on_can_player_reach_change(_can_player_reach):
 	can_player_reach = _can_player_reach
-	if can_player_reach:
+	if can_player_reach and game_state.active_turn == game_state.Turn.Player:
 		$Reachable.show()
 	else:
 		$Reachable.hide()
 
 # Called when the player just moved
 func _on_player_tile_id_set(player_tile_id):
+	print ("tile signal caught: ", player_tile_id)
 	# If player is on this tile
 	if player_tile_id == tile_id:
 		# Update our state to know that we have the player
@@ -69,16 +70,6 @@ func _on_player_tile_id_set(player_tile_id):
 		
 		# Visually display the player sprite
 		$Player.show()
-		
-		# Reset all tiles to not be reachable. This must happen before setting the new neighbors to
-		# be reachable because its previous neighbors need to be updated somehow.
-		for tile in get_parent().get_children():
-			tile.emit_signal("change_can_player_reach", false)
-		
-		# Tell all neighbor tiles whether or not they are reachable
-		for tile in get_all_neighbors():
-			tile.emit_signal("change_can_player_reach", tile.tile_state == TileState.None)
-		
 	else:
 		# Update our state to know that we no longer have the player
 		has_player = false

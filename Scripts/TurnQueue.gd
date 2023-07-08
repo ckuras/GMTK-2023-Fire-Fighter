@@ -7,10 +7,12 @@ var active_turn: Turn
 
 func _ready():
 	active_turn = get_child(0)
-	play_turn()
+	await game_state.game_state_initialized
+	play_active_turn()
 
-func play_turn():
+func play_active_turn():
+	print("playing active turn")
 	await active_turn.play_turn()
 	var new_index: int = (active_turn.get_index() + 1) % get_child_count()
 	active_turn = get_child(new_index)
-	play_turn()
+	play_active_turn()
