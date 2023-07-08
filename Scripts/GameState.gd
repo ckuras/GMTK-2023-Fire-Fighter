@@ -18,15 +18,15 @@ var active_turn = Turn.Player
 func _ready():
 	self.player_tile_id = 4
 	self.player_moves_remaining = 2
-	emit_signal("game_state_initialized")
 	self.player_fire_charge_count = 1
+	emit_signal("game_state_initialized")
 
-# Player -------------------------------------------------------------------------------------------
+### Boilerplate
 
 func _set_player_tile_id(_player_tile_id):
 	player_tile_id = _player_tile_id
 	emit_signal("player_tile_id_set", player_tile_id)
-	
+
 func _set_player_moves_remaining(_player_moves_remaining):
 	player_moves_remaining = _player_moves_remaining
 

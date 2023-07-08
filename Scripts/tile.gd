@@ -24,7 +24,6 @@ const TILE_SIZE = Vector2i(32,16)
 
 @export var can_player_reach = false
 @export var has_player = false
-@export var is_flammable = true
 @export var tile_id: int
 @export var tile_state = TileState.None
 
@@ -208,17 +207,27 @@ func handle_left_mouse_up():
 func handle_right_mouse_down(event: InputEventMouseButton):
 	print("caught right click on tile ", tile_id)
 	
-	var is_within_player_range = false
-	for tile in get_all_neighbors():
-		if tile.has_player:
-			is_within_player_range = true
-	
-	var can_be_lit_on_fire = is_within_player_range and is_flammable
+	var does_player_have_charges = game_state.player_fire_charge_count > 0
+	var can_be_lit_on_fire = (
+		does_player_have_charges and 
+		is_player_with_cardinal_neighbors() and 
+		is_flammable()
+	)
 
 	if can_be_lit_on_fire:
+		# Light the tile on fire
 		emit_signal("change_tile_state", TileState.Fire)
+		game_state.player_fire_charge_count -= 1
 	
 	previous_right_clicked = true
+
+func is_flammable() -> bool:
+	return tile_state != TileState.Fire 
+
+func is_player_with_cardinal_neighbors():
+	for tile in get_cardinal_neighbors():
+		if tile.has_player: return true
+	return false
 
 func handle_right_mouse_up():
 	print("caught right release on tile ", tile_id)
