@@ -50,3 +50,4 @@ tile_id = 3
 [node name="Tile10" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(64, 32)
 tile_id = 3
+tile_state = 2

@@ -185,21 +185,9 @@ func handle_mouse_event(event: InputEventMouseButton):
 		handle_right_mouse_down(event)
 	if (is_right_releasing):
 		handle_right_mouse_up()
-	
+
 func handle_left_mouse_down(event: InputEventMouseButton):
-	var can_player_move = game_state.player_moves_remaining > 0
-	var can_player_reach_this_tile = can_player_reach
-	var is_player_turn = game_state.active_turn == game_state.Turn.Player
-	var can_move_to_tile = can_player_move and can_player_reach_this_tile and is_player_turn
-	
-	if can_move_to_tile: move_player_to_tile()
-	
-	previous_left_clicked = true
-
-func handle_left_mouse_up():
-	previous_left_clicked = false
-
-func handle_right_mouse_down(event: InputEventMouseButton):
+#func handle_right_mouse_down(event: InputEventMouseButton):
 	var does_player_have_charges = game_state.player_fire_charge_count > 0
 	var can_be_lit_on_fire = (
 		does_player_have_charges and 
@@ -212,8 +200,25 @@ func handle_right_mouse_down(event: InputEventMouseButton):
 		emit_signal("change_tile_state", TileState.Fire)
 		game_state.player_fire_charge_count -= 1
 	
+	previous_left_clicked = true
+
+func handle_right_mouse_down(event: InputEventMouseButton):
+#func handle_left_mouse_down(event: InputEventMouseButton):
+	var can_player_move = game_state.player_moves_remaining > 0
+	var can_player_reach_this_tile = can_player_reach
+	var is_player_turn = game_state.active_turn == game_state.Turn.Player
+	var can_move_to_tile = can_player_move and can_player_reach_this_tile and is_player_turn
+	
+	if can_move_to_tile: move_player_to_tile()
+	
 	previous_right_clicked = true
 
+func handle_left_mouse_up():
+	previous_left_clicked = false
+
+func handle_right_mouse_up():
+	previous_right_clicked = false
+	
 func is_flammable() -> bool:
 	return tile_state != TileState.Fire 
 
@@ -221,9 +226,6 @@ func is_player_with_cardinal_neighbors():
 	for tile in get_cardinal_neighbors():
 		if tile.has_player: return true
 	return false
-
-func handle_right_mouse_up():
-	previous_right_clicked = false
 
 func move_player_to_tile():
 	game_state.player_tile_id = tile_id
