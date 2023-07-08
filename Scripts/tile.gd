@@ -58,7 +58,19 @@ func _on_player_tile_id_set(player_tile_id):
 		has_player = false
 		$Player.hide()
 
-func get_neighbors_include_nulls() -> Array[Tile]:
+func get_all_neighbors_include_nulls() -> Array[Tile]:
+	return [
+		get_neighbor_by_direction(Direction.N),
+		get_neighbor_by_direction(Direction.E),
+		get_neighbor_by_direction(Direction.S),
+		get_neighbor_by_direction(Direction.W),
+		get_neighbor_by_direction(Direction.NE),
+		get_neighbor_by_direction(Direction.NW),
+		get_neighbor_by_direction(Direction.SE),
+		get_neighbor_by_direction(Direction.SW)
+	]
+
+func get_cardinal_neighbors_include_nulls() -> Array[Tile]:
 	return [
 		get_neighbor_by_direction(Direction.NE),
 		get_neighbor_by_direction(Direction.NW),
@@ -66,10 +78,17 @@ func get_neighbors_include_nulls() -> Array[Tile]:
 		get_neighbor_by_direction(Direction.SW)
 	]
 
-func get_neighbors():
+func get_all_neighbors() -> Array[Tile]:
 	var not_null_neighbors: Array[Tile]
-	not_null_neighbors.assign(get_neighbors_include_nulls().filter(
-		func(t): return t != null
+	not_null_neighbors.assign(get_all_neighbors_include_nulls().filter(
+		func(n): return n != null
+	))
+	return not_null_neighbors
+
+func get_cardinal_neighbors():
+	var not_null_neighbors: Array[Tile]
+	not_null_neighbors.assign(get_cardinal_neighbors_include_nulls().filter(
+		func(n): return n != null
 	))
 	return not_null_neighbors
 
@@ -90,7 +109,7 @@ func get_target_by_direction(direction: Direction):
 			return Vector2(-16, 8)	
 
 func spread_to_neighbors():
-	var neighbors: Array[Tile] = get_neighbors()
+	var neighbors: Array[Tile] = get_cardinal_neighbors()
 	for tile in neighbors:
 		if tile.tile_state != TileState.Fire:
 			tile.emit_signal("change_tile_state", tile_state)
