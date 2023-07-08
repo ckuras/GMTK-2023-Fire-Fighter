@@ -5,14 +5,19 @@
 [node name="Board" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Tile" parent="." instance=ExtResource("1_kkxld")]
-position = Vector2(16, 8)
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Tile" parent="Tiles" instance=ExtResource("1_kkxld")]
 state = 1
 
-[node name="Tile2" parent="." instance=ExtResource("1_kkxld")]
+[node name="Tile2" parent="Tiles" instance=ExtResource("1_kkxld")]
+position = Vector2(16, 8)
 
-[node name="Tile3" parent="." instance=ExtResource("1_kkxld")]
+[node name="Tile3" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(-16, 8)
 
-[node name="Tile4" parent="." instance=ExtResource("1_kkxld")]
+[node name="Tile4" parent="Tiles" instance=ExtResource("1_kkxld")]
+position = Vector2(0, 16)
+
+[node name="Tile5" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 16)
