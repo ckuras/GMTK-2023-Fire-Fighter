@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmvhuo1g7sssa"]
+
+[ext_resource type="Texture2D" uid="uid://cdwcysljin2vi" path="res://Assets/iso_tile.png" id="1_6lb7u"]
+
+[node name="Board" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Tile" type="Sprite2D" parent="."]
+texture = ExtResource("1_6lb7u")
+
+[node name="Tile2" type="Sprite2D" parent="."]
+position = Vector2(16, 8)
+texture = ExtResource("1_6lb7u")
+
+[node name="Tile3" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+texture = ExtResource("1_6lb7u")
+
+[node name="Tile4" type="Sprite2D" parent="."]
+position = Vector2(-16, 8)
+texture = ExtResource("1_6lb7u")
