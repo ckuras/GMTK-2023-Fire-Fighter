@@ -110,6 +110,7 @@ func _unhandled_input(event):
 		if mouse_over and event.button_index == MOUSE_BUTTON_LEFT:
 			if !previous_clicked and event.is_pressed():
 				previous_clicked = true
+				game_state.player_tile_id = tile_id
 				print("caught first click")
 			if previous_clicked and !event.is_pressed():
 				previous_clicked = false
