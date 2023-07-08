@@ -170,7 +170,7 @@ func _on_mouse_exited():
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if mouse_over and event.button_index == MOUSE_BUTTON_LEFT:
-			if !previous_clicked and event.is_pressed():
+			if can_player_reach and !previous_clicked and event.is_pressed():
 				previous_clicked = true
 				game_state.player_tile_id = tile_id
 				EventBus.emit_signal("turn_ended")
