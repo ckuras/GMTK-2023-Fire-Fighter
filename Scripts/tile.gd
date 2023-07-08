@@ -63,7 +63,6 @@ func _on_can_player_reach_change(_can_player_reach):
 
 # Called when the player just moved
 func _on_player_tile_id_set(player_tile_id):
-	print ("tile signal caught: ", player_tile_id)
 	# If player is on this tile
 	if player_tile_id == tile_id:
 		# Update our state to know that we have the player
@@ -188,8 +187,6 @@ func handle_mouse_event(event: InputEventMouseButton):
 		handle_right_mouse_up()
 	
 func handle_left_mouse_down(event: InputEventMouseButton):
-	print("caught left click on tile ", tile_id)
-	
 	var can_player_move = game_state.player_moves_remaining > 0
 	var can_player_reach_this_tile = can_player_reach
 	var is_player_turn = game_state.active_turn == game_state.Turn.Player
@@ -200,13 +197,9 @@ func handle_left_mouse_down(event: InputEventMouseButton):
 	previous_left_clicked = true
 
 func handle_left_mouse_up():
-	print("caught left release on tile ", tile_id)
-	
 	previous_left_clicked = false
 
 func handle_right_mouse_down(event: InputEventMouseButton):
-	print("caught right click on tile ", tile_id)
-	
 	var does_player_have_charges = game_state.player_fire_charge_count > 0
 	var can_be_lit_on_fire = (
 		does_player_have_charges and 
@@ -230,8 +223,6 @@ func is_player_with_cardinal_neighbors():
 	return false
 
 func handle_right_mouse_up():
-	print("caught right release on tile ", tile_id)
-	
 	previous_right_clicked = false
 
 func move_player_to_tile():

@@ -15,6 +15,8 @@ var active_turn = Turn.Player
 @onready var player_moves_remaining = 2 : set = _set_player_moves_remaining
 @onready var player_fire_charge_count: = 1 : set = _set_player_fire_charge_count
 
+@onready var rounds_remaining_for_current_level = 3 : set = _set_rounds_remaining_for_current_level
+
 func _ready():
 	self.player_tile_id = 4
 	self.player_moves_remaining = 2
@@ -32,3 +34,6 @@ func _set_player_moves_remaining(_player_moves_remaining):
 
 func _set_player_fire_charge_count(_player_fire_charge_count):
 	player_fire_charge_count = _player_fire_charge_count
+
+func _set_rounds_remaining_for_current_level(_rounds_remaining_for_current_level):
+	rounds_remaining_for_current_level = _rounds_remaining_for_current_level

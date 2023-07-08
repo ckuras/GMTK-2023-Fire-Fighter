@@ -8,7 +8,6 @@ func _ready():
 		tile.initialize(game_state)
 
 func _on_player_tile_id_set(player_tile_id):
-	print ("board signal caught: ", player_tile_id)
 	draw_reachable_tiles(player_tile_id)
 
 func get_tiles_by_state(tile_state: Tile.TileState) -> Array[Tile]:
