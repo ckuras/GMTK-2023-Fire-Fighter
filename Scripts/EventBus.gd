@@ -1,6 +1,5 @@
 extends Node
 
-signal tiles_initialized
 signal level_initialized
 
 signal turn_ended

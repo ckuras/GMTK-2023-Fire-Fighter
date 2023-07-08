@@ -3,12 +3,12 @@ class_name Board extends Node2D
 @export var game_state: GameState
 
 func _ready():
-	game_state.player_tile_id_set.connect(_on_player_tile_id_set)
+	game_state.player_tile_name_set.connect(_on_player_tile_name_set)
 	for tile in $Tiles.get_children():
 		tile.initialize(game_state)
 
-func _on_player_tile_id_set(player_tile_id):
-	draw_reachable_tiles(player_tile_id)
+func _on_player_tile_name_set(player_tile_name):
+	draw_reachable_tiles(player_tile_name)
 
 func get_tiles_by_state(tile_state: Tile.TileState) -> Array[Tile]:
 	var tiles: Array[Tile]
@@ -21,14 +21,14 @@ func reset_reachable_tiles():
 	for tile in $Tiles.get_children():
 		tile.emit_signal("change_can_player_reach", false)
 
-func draw_reachable_tiles(player_tile_id):
+func draw_reachable_tiles(player_tile_name):
 	# Reset all tiles to not be reachable. This must happen before setting the new neighbors to
 	# be reachable because its previous neighbors need to be updated somehow.
 	for tile in $Tiles.get_children():
 		tile.emit_signal("change_can_player_reach", false)
 
 	var player_tile = $Tiles.get_children().filter(
-		func(tile): return player_tile_id == tile.tile_id 
+		func(tile): return player_tile_name == tile.name
 	)
 	if player_tile.size() == 1:
 		# Tell all neighbor tiles whether or not they are reachable

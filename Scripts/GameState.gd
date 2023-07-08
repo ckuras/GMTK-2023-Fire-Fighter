@@ -1,7 +1,7 @@
 class_name GameState extends Node
 
 signal game_state_initialized
-signal player_tile_id_set(_player_tile_id)
+signal player_tile_name_set(_player_tile_name)
 
 enum Turn {
 	Player,
@@ -11,23 +11,23 @@ enum Turn {
 
 var active_turn = Turn.Player
 
-@onready var player_tile_id = 0 : set = _set_player_tile_id
+@onready var player_tile_name = "Tile" : set = _set_player_tile_name
 @onready var player_moves_remaining = 2 : set = _set_player_moves_remaining
 @onready var player_fire_charge_count: = 1 : set = _set_player_fire_charge_count
 
 @onready var rounds_remaining_for_current_level = 3 : set = _set_rounds_remaining_for_current_level
 
 func _ready():
-	self.player_tile_id = 4
-	self.player_moves_remaining = 2
-	self.player_fire_charge_count = 1
+#	self.player_tile_name = "Tile"
+#	self.player_moves_remaining = 2
+#	self.player_fire_charge_count = 1
 	emit_signal("game_state_initialized")
 
 ### Boilerplate
 
-func _set_player_tile_id(_player_tile_id):
-	player_tile_id = _player_tile_id
-	emit_signal("player_tile_id_set", player_tile_id)
+func _set_player_tile_name(_player_tile_name):
+	player_tile_name = _player_tile_name
+	emit_signal("player_tile_name_set", player_tile_name)
 
 func _set_player_moves_remaining(_player_moves_remaining):
 	player_moves_remaining = _player_moves_remaining

@@ -20,11 +20,8 @@ enum Direction {
 	SW
 }
 
-const TILE_SIZE = Vector2i(32,16)
-
 @export var can_player_reach = false
-@export var has_player = false
-@export var tile_id: int
+@export var has_player: bool
 @export var tile_state = TileState.None
 
 @onready var sprite: Sprite2D = $Sprite
@@ -34,15 +31,15 @@ var game_state: GameState
 
 func initialize(_game_state: GameState):
 	game_state = _game_state
-	game_state.player_tile_id_set.connect(_on_player_tile_id_set)
+	game_state.player_tile_name_set.connect(_on_player_tile_name_set)
 
-func _ready(): 
+func _ready():
 	change_tile_state.connect(_on_state_change)
 	change_can_player_reach.connect(_on_can_player_reach_change)
 	emit_signal("change_tile_state", tile_state)
 
-func tile_state_to_string(tile_state: TileState):
-	match tile_state:
+func tile_state_to_string(_tile_state: TileState):
+	match _tile_state:
 		0: return "None"
 		1: return "Fire"
 
@@ -62,9 +59,9 @@ func _on_can_player_reach_change(_can_player_reach):
 		$Hover.hide()
 
 # Called when the player just moved
-func _on_player_tile_id_set(player_tile_id):
+func _on_player_tile_name_set(player_tile_name):
 	# If player is on this tile
-	if player_tile_id == tile_id:
+	if player_tile_name == self.name:
 		# Update our state to know that we have the player
 		has_player = true
 		
@@ -178,15 +175,15 @@ func handle_mouse_event(event: InputEventMouseButton):
 	var is_right_releasing = is_mouse_up and is_right_event
 	
 	if (is_left_clicking_on_current_tile):
-		handle_left_mouse_down(event)
+		handle_left_mouse_down()
 	if (is_left_releasing):
 		handle_left_mouse_up()
 	if (is_right_clicking_on_current_tile):
-		handle_right_mouse_down(event)
+		handle_right_mouse_down()
 	if (is_right_releasing):
 		handle_right_mouse_up()
 
-func handle_left_mouse_down(event: InputEventMouseButton):
+func handle_left_mouse_down():
 	var can_player_light_stuff_on_fire = (
 		game_state.player_fire_charge_count > 0 and
 		game_state.active_turn == game_state.Turn.Player
@@ -204,7 +201,7 @@ func handle_left_mouse_down(event: InputEventMouseButton):
 	
 	previous_left_clicked = true
 
-func handle_right_mouse_down(event: InputEventMouseButton):
+func handle_right_mouse_down():
 	var can_player_move = game_state.player_moves_remaining > 0
 	var can_player_reach_this_tile = can_player_reach
 	var is_player_turn = game_state.active_turn == game_state.Turn.Player
@@ -229,7 +226,7 @@ func is_player_within_cardinal_neighbors():
 	return false
 
 func move_player_to_tile():
-	game_state.player_tile_id = tile_id
+	game_state.player_tile_name = self.name
 	if game_state.player_moves_remaining == 1:
 		EventBus.emit_signal("turn_ended")
 	game_state.player_moves_remaining -= 1

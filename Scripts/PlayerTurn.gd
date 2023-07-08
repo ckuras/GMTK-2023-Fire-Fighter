@@ -5,7 +5,7 @@ func play_turn():
 	game_state.active_turn = game_state.Turn.Player
 	
 	reset_player_abilities()
-	board.draw_reachable_tiles(game_state.player_tile_id)
+	board.draw_reachable_tiles(game_state.player_tile_name)
 	await EventBus.turn_ended
 
 	board.reset_reachable_tiles()
