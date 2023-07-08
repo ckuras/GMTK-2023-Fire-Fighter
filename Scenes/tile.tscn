@@ -14,7 +14,8 @@ position = Vector2(0, 8)
 texture = ExtResource("1_bxljw")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(16, -8)
+enabled = false
+target_position = Vector2(0, 0)
 collide_with_areas = true
 collide_with_bodies = false
 

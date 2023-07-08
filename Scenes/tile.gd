@@ -18,6 +18,7 @@ const TILE_SIZE = Vector2i(32,16)
 @export var state = TileState.None
 
 @onready var sprite: Sprite2D = $Sprite
+@onready var ray_cast: RayCast2D = $RayCast2D
 
 func _ready(): 
 	tile_debug()
@@ -40,5 +41,12 @@ func tile_debug():
 	print("")
 
 func get_neighbor(direction: Direction):
-	pass
+	match direction:
+		Direction.NE:
+			ray_cast.target_position = Vector2(16,-8)
+			ray_cast.enabled = true
+			ray_cast.force_raycast_update()
+			var neighbor = ray_cast.get_collider()
+			print(neighbor)
+			
 	

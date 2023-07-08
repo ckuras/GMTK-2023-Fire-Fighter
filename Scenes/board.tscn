@@ -18,6 +18,3 @@ position = Vector2(-16, 8)
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 16)
-
-[node name="Tile5" parent="Tiles" instance=ExtResource("1_kkxld")]
-position = Vector2(0, 16)
