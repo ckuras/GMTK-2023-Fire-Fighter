@@ -18,7 +18,7 @@ enum Direction {
 const TILE_SIZE = Vector2i(32,16)
 
 @export var has_player = false
-@export var tile_id = 0
+@export var tile_id: int
 @export var tile_state = TileState.None
 
 @onready var sprite: Sprite2D = $Sprite
