@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dtag84i2rw8vh" path="res://Scenes/player.tscn" id="3_6l0tj"]
 
 [node name="Tile" type="Area2D"]
-texture_filter = 1
 script = ExtResource("1_ulwfg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
