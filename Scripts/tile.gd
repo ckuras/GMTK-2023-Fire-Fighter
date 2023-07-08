@@ -1,5 +1,7 @@
 class_name Tile extends Node2D
 
+signal change_state(state: Tile.TileState)
+
 enum TileState {
 	None,
 	Fire,
@@ -21,31 +23,35 @@ const TILE_SIZE = Vector2i(32,16)
 @onready var ray_cast: RayCast2D = $RayCast2D
 
 func _ready(): 
-	tile_debug()
-	sprite.modulate = state_to_modulate(state)
-	print(get_neighbors())
+	change_state.connect(_on_state_change)
+	emit_signal("change_state", state)
 	
 func tile_state_to_string(tile_state: TileState):
 	match tile_state:
 		0: return "None"
 		1: return "Fire"
 
-func state_to_modulate(tile_state: TileState):
+func _on_state_change(tile_state: TileState):
+	state = tile_state
 	match tile_state:
-		0: return sprite.modulate
-		1: return Color.RED
+		0: pass
+		1: modulate = Color.RED
 
-func tile_debug():
-	print("Tile ID: ", tile_id)
-	print(tile_state_to_string(state))
-
-func get_neighbors() -> Array[Tile]:
+func get_neighbors_include_nulls() -> Array[Tile]:
 	return [
 		get_neighbor_by_direction(Direction.NE),
 		get_neighbor_by_direction(Direction.NW),
 		get_neighbor_by_direction(Direction.SE),
 		get_neighbor_by_direction(Direction.SW)
 	]
+
+func get_neighbors():
+	var not_null_neighbors: Array[Tile]
+	not_null_neighbors.assign(get_neighbors_include_nulls().filter(
+		func(t): return t != null
+	))
+	return not_null_neighbors
+	
 
 func get_neighbor_by_direction(direction: Direction):
 	ray_cast.target_position = get_target_by_direction(direction)
@@ -63,3 +69,7 @@ func get_target_by_direction(direction: Direction):
 		Direction.SW:
 			return Vector2(-16, 8)	
 
+func spread_to_neighbors():
+	var neighbors: Array[Tile] = get_neighbors()
+	for tile in neighbors:
+		tile.emit_signal("change_state", state)

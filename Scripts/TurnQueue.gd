@@ -14,8 +14,10 @@ func play_turn():
 	match active_turn:
 		Turn.Fire:
 			var tiles_on_fire: Array[Tile] = board.get_tiles_by_state(Tile.TileState.Fire)
+			await get_tree().create_timer(1.0).timeout
 			for tile in tiles_on_fire:
-				print('this tile is on fire: ', tile)
+				tile.spread_to_neighbors()
+	play_turn()
 			# get all the fire nodes
 			
 			
