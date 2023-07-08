@@ -7,9 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://d3xj7lwu2tl8i" path="res://Scenes/turn_queue.tscn" id="5_l3vyr"]
 [ext_resource type="Script" path="res://Scripts/GameState.gd" id="6_7agrc"]
 
-[node name="Level1" type="Node2D"]
+[node name="Level2" type="Node2D"]
 script = ExtResource("1_8665l")
-level_number = 1
+level_number = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
@@ -28,35 +28,27 @@ tile_state = 2
 
 [node name="Tile2" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(16, -8)
-tile_id = 1
 
 [node name="Tile3" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(-16, -8)
-tile_id = 2
 
 [node name="Tile4" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
-tile_id = 3
 
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(-32, 0)
-tile_id = 3
 
 [node name="Tile6" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(-16, 8)
 has_player = true
-tile_id = 3
 
 [node name="Tile7" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(0, 16)
-tile_id = 3
 
 [node name="Tile8" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(16, 8)
-tile_id = 3
 
 [node name="Tile9" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(32, 0)
-tile_id = 3
 tile_state = 2
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("5_l3vyr")]

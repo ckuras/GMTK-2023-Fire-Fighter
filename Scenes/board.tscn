@@ -16,38 +16,29 @@ tile_state = 1
 
 [node name="Tile2" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(16, 8)
-tile_id = 1
 
 [node name="Tile3" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(-16, 8)
-tile_id = 2
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 16)
-tile_id = 3
 
 [node name="Tile5" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(16, 24)
 has_player = true
-tile_id = 3
 
 [node name="Tile6" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(0, 32)
-tile_id = 3
 
 [node name="Tile7" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(16, 40)
-tile_id = 3
 
 [node name="Tile8" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(32, 48)
-tile_id = 3
 
 [node name="Tile9" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(48, 40)
-tile_id = 3
 
 [node name="Tile10" parent="Tiles" instance=ExtResource("1_kkxld")]
 position = Vector2(64, 32)
-tile_id = 3
 tile_state = 2

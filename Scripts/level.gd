@@ -26,6 +26,8 @@ func _ready():
 	game_state.player_moves_remaining = player_moves_remaining
 	game_state.player_fire_charge_count = player_fire_charge_count
 
+	EventBus.emit_signal("level_initialized")
+
 	print("waiting for player to win round...")
 	await EventBus.player_won_round
 	emit_signal("level_changed", "level_" + str(level_number + 1))

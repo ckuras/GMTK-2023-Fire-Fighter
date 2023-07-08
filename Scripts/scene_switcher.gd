@@ -3,14 +3,18 @@ extends Node
 @onready var current_level = $Level1
 
 func _ready():
+	print("made a new scene switcher")
 	current_level.connect("level_changed", _handle_level_change)
 	EventBus.connect("restart_level", _handle_level_restart)
 
 func _handle_level_change(next_level_name: String):
-	var next_level = load("res://Scenes/Levels/" + next_level_name + ".tscn").instantiate()
-	get_tree().root.add_child(next_level)
-	next_level.connect("level_changed", _handle_level_change)
 	current_level.queue_free()
+	await get_tree().create_timer(0.1).timeout
+	
+	var next_level = load("res://Scenes/Levels/" + next_level_name + ".tscn").instantiate()
+	self.add_child(next_level)
+	next_level.connect("level_changed", _handle_level_change)
+#	current_level.queue_free()
 	current_level = next_level
 
 func _handle_level_restart():

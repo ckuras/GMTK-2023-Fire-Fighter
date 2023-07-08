@@ -7,10 +7,13 @@ var active_turn: Turn
 
 func _ready():
 	active_turn = get_child(0)
+	print("queue waiting for level to be initialized...")
 	await EventBus.level_initialized
+	print("queue found level to be initialized")
 	play_active_turn()
 
 func play_active_turn():
+	print("top of play_active_turn")
 	await active_turn.play_turn()
 	var new_index: int = (active_turn.get_index() + 1) % get_child_count()
 	active_turn = get_child(new_index)
