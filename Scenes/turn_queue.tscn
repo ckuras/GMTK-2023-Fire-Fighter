@@ -8,11 +8,11 @@
 [node name="TurnQueue" type="Node"]
 script = ExtResource("1_rjq1k")
 
-[node name="Fire" type="Node" parent="."]
-script = ExtResource("3_kkjgi")
-
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_1asjx")
+
+[node name="Fire" type="Node" parent="."]
+script = ExtResource("3_kkjgi")
 
 [node name="Infected" type="Node" parent="."]
 script = ExtResource("4_n4f7s")

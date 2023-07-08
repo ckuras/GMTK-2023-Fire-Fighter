@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://byb3wjan8u1rx"]
+[gd_scene load_steps=5 format=3 uid="uid://byb3wjan8u1rx"]
 
 [ext_resource type="Texture2D" uid="uid://cdwcysljin2vi" path="res://Assets/iso_tile.png" id="1_bxljw"]
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_ulwfg"]
 [ext_resource type="PackedScene" uid="uid://dtag84i2rw8vh" path="res://Scenes/player.tscn" id="3_6l0tj"]
+[ext_resource type="Texture2D" uid="uid://bavwh028kg0ak" path="res://Assets/iso_tile_hover.png" id="3_liu54"]
 
 [node name="Tile" type="Area2D"]
 script = ExtResource("1_ulwfg")
@@ -13,15 +14,15 @@ texture = ExtResource("1_bxljw")
 
 [node name="Hover" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(1, 0.501961, 0, 1)
+modulate = Color(1, 1, 1, 0.705882)
 position = Vector2(0, 8)
-texture = ExtResource("1_bxljw")
+texture = ExtResource("3_liu54")
 
 [node name="Reachable" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(0, 0, 0, 1)
+modulate = Color(1, 1, 0, 0.521569)
 position = Vector2(0, 8)
-texture = ExtResource("1_bxljw")
+texture = ExtResource("3_liu54")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
