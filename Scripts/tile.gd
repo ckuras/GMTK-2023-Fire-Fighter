@@ -44,6 +44,7 @@ func _on_state_change(_tile_state: TileState):
 	match tile_state:
 		0: pass
 		1: modulate = Color.RED
+		2: modulate = Color.WEB_PURPLE
 
 func _on_player_tile_id_set(player_tile_id):
 	if player_tile_id == tile_id:
@@ -87,7 +88,8 @@ func get_target_by_direction(direction: Direction):
 func spread_to_neighbors():
 	var neighbors: Array[Tile] = get_neighbors()
 	for tile in neighbors:
-		tile.emit_signal("change_tile_state", tile_state)
+		if tile.tile_state != TileState.Fire:
+			tile.emit_signal("change_tile_state", tile_state)
 
 # --- Mouse events and state ---
 

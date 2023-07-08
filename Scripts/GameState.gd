@@ -5,6 +5,7 @@ signal player_tile_id_set(_player_tile_id)
 enum Turn {
 	Player,
 	Fire,
+	Infected
 }
 
 var active_turn = Turn.Player
