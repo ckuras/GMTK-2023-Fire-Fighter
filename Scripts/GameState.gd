@@ -1,4 +1,4 @@
-extends Node
+class_name GameState extends Node
 
 signal player_tile_id_set(_player_tile_id)
 

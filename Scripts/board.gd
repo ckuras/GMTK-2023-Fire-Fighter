@@ -1,6 +1,6 @@
 class_name Board extends Node2D
 
-@export var game_state: Node
+@export var game_state: GameState
 
 func _ready():
 	for tile in $Tiles.get_children():

@@ -5,6 +5,7 @@ signal change_tile_state(state: Tile.TileState)
 enum TileState {
 	None,
 	Fire,
+	Infected
 }
 
 enum Direction {
@@ -23,9 +24,9 @@ const TILE_SIZE = Vector2i(32,16)
 @onready var sprite: Sprite2D = $Sprite
 @onready var ray_cast: RayCast2D = $RayCast2D
 
-var game_state: Node
+var game_state: GameState
 
-func initialize(_game_state: Node):
+func initialize(_game_state: GameState):
 	game_state = _game_state
 	game_state.player_tile_id_set.connect(_on_player_tile_id_set)
 

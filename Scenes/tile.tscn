@@ -23,7 +23,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(0, -8, 16, 0, 0, 8, -16, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_6l0tj")]

@@ -1,7 +1,7 @@
 extends Node
 
 @export var board: Board
-@export var game_state: Node
+@export var game_state: GameState
 
 func _ready():
 	play_turn()
