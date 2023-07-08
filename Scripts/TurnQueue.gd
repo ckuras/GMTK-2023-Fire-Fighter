@@ -3,29 +3,14 @@ extends Node
 @export var board: Board
 @export var game_state: GameState
 
+var active_turn: Turn
+
 func _ready():
-	game_state.active_turn = game_state.Turn.Player
+	active_turn = get_child(0)
 	play_turn()
 
 func play_turn():
-	match game_state.active_turn:
-		game_state.Turn.Player:
-			print("Player's turn")
-			pass
-		game_state.Turn.Fire:
-			print("Fire's turn")
-			var tiles_on_fire: Array[Tile] = board.get_tiles_by_state(Tile.TileState.Fire)
-			await get_tree().create_timer(1.0).timeout
-			for tile in tiles_on_fire:
-				tile.spread_to_neighbors()
-			game_state.active_turn = game_state.Turn.Infected
-#			play_turn()
-		game_state.Turn.Infected:
-			print("Infected's turn")
-			var tiles_on_fire: Array[Tile] = board.get_tiles_by_state(Tile.TileState.Infected)
-			await get_tree().create_timer(1.0).timeout
-			for tile in tiles_on_fire:
-				tile.spread_to_neighbors()
-			game_state.active_turn = game_state.Turn.Fire
-#			play_turn()
-			
+	await active_turn.play_turn()
+	var new_index: int = (active_turn.get_index() + 1) % get_child_count()
+	active_turn = get_child(new_index)
+	play_turn()

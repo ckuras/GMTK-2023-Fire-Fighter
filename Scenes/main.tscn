@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://gf6w34qsgq1w"]
 
 [ext_resource type="PackedScene" uid="uid://cmvhuo1g7sssa" path="res://Scenes/board.tscn" id="1_utpif"]
-[ext_resource type="Script" path="res://Scripts/TurnQueue.gd" id="2_2anat"]
+[ext_resource type="PackedScene" uid="uid://d3xj7lwu2tl8i" path="res://Scenes/turn_queue.tscn" id="2_praf1"]
 [ext_resource type="Script" path="res://Scripts/GameState.gd" id="3_0spw3"]
 
 [node name="Main" type="Node2D"]
@@ -12,8 +12,7 @@ zoom = Vector2(5, 5)
 [node name="Board" parent="." node_paths=PackedStringArray("game_state") instance=ExtResource("1_utpif")]
 game_state = NodePath("../GameState")
 
-[node name="TurnQueue" type="Node" parent="." node_paths=PackedStringArray("board", "game_state")]
-script = ExtResource("2_2anat")
+[node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("2_praf1")]
 board = NodePath("../Board")
 game_state = NodePath("../GameState")
 
