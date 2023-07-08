@@ -16,20 +16,18 @@ enum Direction {
 
 const TILE_SIZE = Vector2i(32,16)
 
-@export var has_player = false : set = _set_has_player
-
-func _set_has_player(_has_player):
-	has_player = _has_player
-	if has_player:
-		$Player.show()
-	else:
-		$Player.hide()
-
+@export var has_player = false
 @export var tile_id = 0
 @export var state = TileState.None
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var ray_cast: RayCast2D = $RayCast2D
+
+var game_state: Node
+
+func initialize(_game_state: Node):
+	game_state = _game_state
+	game_state.player_tile_id_set.connect(_on_player_tile_id_set)
 
 func _ready(): 
 	change_state.connect(_on_state_change)
@@ -45,6 +43,14 @@ func _on_state_change(tile_state: TileState):
 	match tile_state:
 		0: pass
 		1: modulate = Color.RED
+
+func _on_player_tile_id_set(player_tile_id):
+	if player_tile_id == tile_id:
+		has_player = true
+		$Player.show()
+	else:
+		has_player = false
+		$Player.hide()
 
 func get_neighbors_include_nulls() -> Array[Tile]:
 	return [
@@ -90,12 +96,14 @@ var mouse_over = false
 func _on_mouse_entered():
 	print("mouse entered: ", tile_id)
 	mouse_over = true
-	$Hover.show()
+	if game_state.active_turn == game_state.Turn.Player:
+		$Hover.show()
 
 func _on_mouse_exited():
 	print("mouse exited: ", tile_id)
 	mouse_over = false
-	$Hover.hide()
+	if game_state.active_turn == game_state.Turn.Player:
+		$Hover.hide()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
