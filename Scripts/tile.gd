@@ -172,14 +172,15 @@ func _unhandled_input(event):
 func handle_mouse_click(event: InputEventMouseButton):
 	var is_clicking_on_current_tile = mouse_over and event.button_index == MOUSE_BUTTON_LEFT
 	var can_move_to_current_tile = game_state.player_moves_remaining > 0 and can_player_reach
+	var is_player_turn = game_state.active_turn == game_state.Turn.Player
 	var is_mouse_down = !previous_clicked and event.is_pressed()
 	var is_mouse_up = previous_clicked and !event.is_pressed()
+	var can_move = is_clicking_on_current_tile and can_move_to_current_tile and is_mouse_down and is_player_turn
 	
-	if is_clicking_on_current_tile:
-		if can_move_to_current_tile and is_mouse_down:
-			move_player_to_tile()
-		if is_mouse_up:
-			previous_clicked = false
+	if can_move:
+		move_player_to_tile()
+	if !is_clicking_on_current_tile and is_mouse_up:
+		previous_clicked = false
 
 func move_player_to_tile():
 	previous_clicked = true

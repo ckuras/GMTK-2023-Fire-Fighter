@@ -2,6 +2,7 @@ extends Turn
 
 func play_turn():
 	print("Player's turn")
+	game_state.active_turn = game_state.Turn.Player
 	reset_player_moves_remaining()
 	
 	await EventBus.turn_ended
