@@ -33,7 +33,7 @@ func tile_state_to_string(tile_state: TileState):
 func state_to_modulate(tile_state: TileState):
 	match tile_state:
 		0: return sprite.modulate
-		1: return sprite.modulate.inverted()
+		1: return Color.RED
 
 func tile_debug():
 	print("Tile ID: ", tile_id)
@@ -62,4 +62,4 @@ func get_target_by_direction(direction: Direction):
 			return Vector2(16, 8)
 		Direction.SW:
 			return Vector2(-16, 8)	
-	
+
