@@ -7,7 +7,7 @@ var active_turn: Turn
 
 func _ready():
 	active_turn = get_child(0)
-	await game_state.game_state_initialized
+	await EventBus.level_initialized
 	play_active_turn()
 
 func play_active_turn():

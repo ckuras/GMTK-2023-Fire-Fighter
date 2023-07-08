@@ -22,14 +22,15 @@ game_state = NodePath("../GameState")
 [node name="Tiles" type="Node2D" parent="Board"]
 script = ExtResource("2_rxldx")
 
+[node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
+position = Vector2(-32, -16)
+has_player = true
+tile_id = 2
+tile_state = 2
+
 [node name="Tile3" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(-16, -8)
 tile_id = 2
-
-[node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
-position = Vector2(-32, -16)
-tile_id = 2
-tile_state = 2
 
 [node name="Tile4" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 tile_id = 3
@@ -40,8 +41,7 @@ tile_id = 3
 
 [node name="Tile9" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(32, 16)
-has_player = true
-tile_id = 3
+tile_id = 4
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("2_p06tp")]
 board = NodePath("../Board")
