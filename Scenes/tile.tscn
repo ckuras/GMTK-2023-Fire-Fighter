@@ -17,13 +17,19 @@ modulate = Color(1, 0.501961, 0, 1)
 position = Vector2(0, 8)
 texture = ExtResource("1_bxljw")
 
+[node name="Reachable" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 8)
+texture = ExtResource("1_bxljw")
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
 collide_with_areas = true
 collide_with_bodies = false
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -8, 16, 0, 0, 8, -16, 0)
+polygon = PackedVector2Array(0, -7, 15, 0, 0, 7, -15, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_6l0tj")]
 
