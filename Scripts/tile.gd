@@ -167,12 +167,23 @@ func _on_mouse_exited():
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if mouse_over and event.button_index == MOUSE_BUTTON_LEFT:
-			if game_state.player_moves_remaining > 0 and can_player_reach and !previous_clicked and event.is_pressed():
-				previous_clicked = true
-				game_state.player_tile_id = tile_id
-				if game_state.player_moves_remaining == 1:
-					EventBus.emit_signal("turn_ended")
-				game_state.player_moves_remaining -= 1
-			if previous_clicked and !event.is_pressed():
-				previous_clicked = false
+		handle_mouse_click(event)
+
+func handle_mouse_click(event: InputEventMouseButton):
+	var is_clicking_on_current_tile = mouse_over and event.button_index == MOUSE_BUTTON_LEFT
+	var can_move_to_current_tile = game_state.player_moves_remaining > 0 and can_player_reach
+	var is_mouse_down = !previous_clicked and event.is_pressed()
+	var is_mouse_up = previous_clicked and !event.is_pressed()
+	
+	if is_clicking_on_current_tile:
+		if can_move_to_current_tile and is_mouse_down:
+			move_player_to_tile()
+		if is_mouse_up:
+			previous_clicked = false
+
+func move_player_to_tile():
+	previous_clicked = true
+	game_state.player_tile_id = tile_id
+	if game_state.player_moves_remaining == 1:
+		EventBus.emit_signal("turn_ended")
+	game_state.player_moves_remaining -= 1
