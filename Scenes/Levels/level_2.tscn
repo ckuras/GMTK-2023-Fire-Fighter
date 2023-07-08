@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://cus6ykbdclfgm"]
+
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_8665l"]
+[ext_resource type="Script" path="res://Scripts/board.gd" id="2_mo3gu"]
+[ext_resource type="Script" path="res://Scripts/Tiles.gd" id="3_3p81f"]
+[ext_resource type="PackedScene" uid="uid://byb3wjan8u1rx" path="res://Scenes/tile.tscn" id="4_40nkd"]
+[ext_resource type="PackedScene" uid="uid://d3xj7lwu2tl8i" path="res://Scenes/turn_queue.tscn" id="5_l3vyr"]
+[ext_resource type="Script" path="res://Scripts/GameState.gd" id="6_7agrc"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_8665l")
+level_number = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[node name="Board" type="Node2D" parent="." node_paths=PackedStringArray("game_state")]
+y_sort_enabled = true
+script = ExtResource("2_mo3gu")
+game_state = NodePath("../GameState")
+
+[node name="Tiles" type="Node2D" parent="Board"]
+script = ExtResource("3_3p81f")
+
+[node name="Tile" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(0, -16)
+tile_state = 1
+
+[node name="Tile2" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(16, -8)
+tile_id = 1
+
+[node name="Tile3" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(-16, -8)
+tile_id = 2
+
+[node name="Tile4" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+tile_id = 3
+
+[node name="Tile5" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(-32, 0)
+tile_id = 3
+
+[node name="Tile6" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(-16, 8)
+tile_id = 3
+
+[node name="Tile7" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(0, 16)
+tile_id = 3
+
+[node name="Tile8" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(16, 8)
+tile_id = 3
+
+[node name="Tile9" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
+position = Vector2(32, 0)
+tile_id = 3
+
+[node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("5_l3vyr")]
+board = NodePath("../Board")
+game_state = NodePath("../GameState")
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("6_7agrc")

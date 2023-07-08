@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bavwh028kg0ak" path="res://Assets/iso_tile_hover.png" id="3_liu54"]
 
 [node name="Tile" type="Area2D"]
+texture_filter = 1
 script = ExtResource("1_ulwfg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
