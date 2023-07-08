@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3xj7lwu2tl8i"]
+
+[ext_resource type="Script" path="res://Scripts/TurnQueue.gd" id="1_rjq1k"]
+[ext_resource type="Script" path="res://Scripts/PlayerTurn.gd" id="2_1asjx"]
+[ext_resource type="Script" path="res://Scripts/FireTurn.gd" id="3_kkjgi"]
+[ext_resource type="Script" path="res://Scripts/InfectedTurn.gd" id="4_n4f7s"]
+
+[node name="TurnQueue" type="Node"]
+script = ExtResource("1_rjq1k")
+
+[node name="Fire" type="Node" parent="."]
+script = ExtResource("3_kkjgi")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("2_1asjx")
+
+[node name="Infected" type="Node" parent="."]
+script = ExtResource("4_n4f7s")
