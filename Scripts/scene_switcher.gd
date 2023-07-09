@@ -30,6 +30,7 @@ func _handle_level_restart():
 
 func _unhandled_input(event):
 	if event is InputEventKey:
+		var was_m_pressed = event.get_keycode_with_modifiers() == KEY_M and event.is_pressed()
 		var was_r_pressed = event.get_keycode_with_modifiers() == KEY_R and event.is_pressed()
 		var was_space_pressed = event.get_keycode_with_modifiers() == KEY_SPACE and event.is_pressed()
 		var was_one_pressed = event.get_keycode_with_modifiers() == KEY_1 and event.is_pressed()
@@ -42,6 +43,9 @@ func _unhandled_input(event):
 		var was_eight_pressed = event.get_keycode_with_modifiers() == KEY_8 and event.is_pressed()
 		var was_nine_pressed = event.get_keycode_with_modifiers() == KEY_9 and event.is_pressed()
 		
+		if was_m_pressed:
+			EventBus.emit_signal("toggle_mute")
+			pass
 		if was_r_pressed:
 			EventBus.emit_signal("restart_level", current_level_name)
 			pass
