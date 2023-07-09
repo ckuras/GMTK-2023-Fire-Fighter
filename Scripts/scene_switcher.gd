@@ -58,6 +58,18 @@ func _unhandled_input(event):
 		if was_five_pressed:
 			current_level.emit_signal("level_changed", "level_5")
 			pass
+		if was_six_pressed:
+			current_level.emit_signal("level_changed", "level_6")
+			pass
+		if was_seven_pressed:
+			current_level.emit_signal("level_changed", "level_7")
+			pass
+		if was_eight_pressed:
+			current_level.emit_signal("level_changed", "level_8")
+			pass
+		if was_nine_pressed:
+			current_level.emit_signal("level_changed", "level_9")
+			pass
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 			pass
