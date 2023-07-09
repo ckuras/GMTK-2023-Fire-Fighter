@@ -62,17 +62,24 @@ func _on_can_player_reach_change(_can_player_reach):
 func _on_player_tile_name_set(player_tile_name):
 	# If player is on this tile
 	if player_tile_name == self.name:
+		
 		# Update our state to know that we have the player
 		has_player = true
 		
 		# Visually display the player sprite
 		$Player.show()
+		
+		# Put this tile above all others
+		z_index = 2
 	else:
 		# Update our state to know that we no longer have the player
 		has_player = false
 		
 		# Visually hide the player sprite
-		$Player.hide()	
+		$Player.hide()
+		
+		# Put this tile below the player level
+		z_index = 1
 
 func get_all_neighbors_include_nulls() -> Array[Tile]:
 	return [
