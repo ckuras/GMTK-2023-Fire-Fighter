@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://cn7un8n0n8e5r"]
+
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_7r2p5"]
+[ext_resource type="Script" path="res://Scripts/board.gd" id="2_5osvp"]
+[ext_resource type="Script" path="res://Scripts/Tiles.gd" id="3_44cwj"]
+[ext_resource type="PackedScene" uid="uid://byb3wjan8u1rx" path="res://Scenes/tile.tscn" id="4_e05qc"]
+[ext_resource type="PackedScene" uid="uid://d3xj7lwu2tl8i" path="res://Scenes/turn_queue.tscn" id="5_ug02q"]
+[ext_resource type="Script" path="res://Scripts/GameState.gd" id="6_u2sx7"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_7r2p5")
+level_number = 4
+
+[node name="Board" type="Node2D" parent="." node_paths=PackedStringArray("game_state")]
+y_sort_enabled = true
+script = ExtResource("2_5osvp")
+game_state = NodePath("../GameState")
+
+[node name="Tiles" type="Node2D" parent="Board"]
+script = ExtResource("3_44cwj")
+
+[node name="Tile" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(0, -16)
+tile_state = 2
+
+[node name="Tile2" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(16, -8)
+
+[node name="Tile3" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(-16, -8)
+
+[node name="Tile4" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+
+[node name="Tile5" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(-32, 0)
+
+[node name="Tile6" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(-16, 8)
+has_player = true
+
+[node name="Tile7" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(0, 16)
+
+[node name="Tile8" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(16, 8)
+
+[node name="Tile9" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(32, 0)
+tile_state = 2
+
+[node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("5_ug02q")]
+board = NodePath("../Board")
+game_state = NodePath("../GameState")
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("6_u2sx7")
+player_moves_max_for_level = 1
+player_fire_charge_max_for_level = 1
+rounds_remaining_for_current_level = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
