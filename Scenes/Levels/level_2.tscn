@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgduy872g3t47"]
+[gd_scene load_steps=6 format=3 uid="uid://ctoparb0gy08i"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_mhk62"]
 [ext_resource type="Script" path="res://Scripts/board.gd" id="1_uiim3"]
@@ -19,23 +19,17 @@ game_state = NodePath("../GameState")
 [node name="Tiles" type="Node2D" parent="Board"]
 
 [node name="Tile1" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
+position = Vector2(-32, -16)
+
+[node name="Tile2" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(-16, -8)
 has_player = true
 
-[node name="Tile2" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
-position = Vector2(-32, -16)
+[node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
+position = Vector2(0, -16)
 
 [node name="Tile6" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(-48, -24)
-
-[node name="Tile3" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
-
-[node name="Tile4" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
-position = Vector2(16, 8)
-tile_state = 2
-
-[node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
-position = Vector2(32, 16)
 tile_state = 2
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("2_p06tp")]
@@ -45,5 +39,8 @@ game_state = NodePath("../GameState")
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("3_isg57")
 player_moves_max_for_level = 1
-player_fire_charge_max_for_level = 1
-rounds_remaining_for_current_level = 2
+player_fire_charge_max_for_level = 2
+rounds_remaining_for_current_level = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
