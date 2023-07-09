@@ -2,8 +2,8 @@ extends Node2D
 
 signal level_changed(level_name)
 
-@onready var game_state: GameState = get_child(3)
-@onready var tiles: Array[Node] = get_child(1).get_child(0).get_children()
+@onready var game_state: GameState = $GameState
+@onready var tiles: Array[Node] = $Board/Tiles.get_children()
 
 @export var level_number: int = 0
 @export var player_tile_name: StringName
