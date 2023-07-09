@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsd03sr0hm2kh"]
 
-[ext_resource type="PackedScene" uid="uid://dgduy872g3t47" path="res://Scenes/Levels/level_1.tscn" id="1_c6odc"]
 [ext_resource type="Script" path="res://Scripts/scene_switcher.gd" id="1_gwv8o"]
+[ext_resource type="PackedScene" uid="uid://c5q0wyii8bmft" path="res://Scenes/Levels/level_1.tscn" id="2_kttum"]
 
 [sub_resource type="Gradient" id="Gradient_duesk"]
 colors = PackedColorArray(0.807843, 0.12549, 0.160784, 1, 0.517647, 0.533333, 0.517647, 1)
@@ -29,7 +29,7 @@ scale = Vector2(0.2, 0.2)
 texture = SubResource("GradientTexture2D_h01v1")
 stretch_mode = 3
 
-[node name="Level1" parent="." instance=ExtResource("1_c6odc")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
+
+[node name="Level" parent="." instance=ExtResource("2_kttum")]

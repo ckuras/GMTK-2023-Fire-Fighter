@@ -228,8 +228,9 @@ func is_player_within_cardinal_neighbors():
 func move_player_to_tile():
 	set_sprite_direction()
 	game_state.player_tile_name = self.name
-	if game_state.player_moves_remaining == 1:
-		EventBus.emit_signal("turn_ended")
+	# TODO: we probably want to highlight the "end turn" button or something here
+	# if game_state.player_moves_remaining == 1:
+		# EventBus.emit_signal("turn_ended")
 	game_state.player_moves_remaining -= 1
 
 func set_sprite_direction():
