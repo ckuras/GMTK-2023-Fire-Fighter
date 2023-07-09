@@ -35,4 +35,4 @@ func draw_reachable_tiles(player_tile_name):
 		# Tell all neighbor tiles whether or not they are reachable
 		for tile in player_tile[0].get_all_neighbors():
 			print (tile.name, " tile_state: ", tile.tile_state)
-			tile.emit_signal("change_can_player_reach", tile.tile_state == Tile.TileState.None)
+			tile.emit_signal("change_can_player_reach", tile.tile_state != Tile.TileState.Fire)
