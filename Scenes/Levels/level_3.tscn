@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctoparb0gy08i"]
+
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_gae1q"]
+[ext_resource type="Script" path="res://Scripts/board.gd" id="2_4gdto"]
+[ext_resource type="PackedScene" uid="uid://byb3wjan8u1rx" path="res://Scenes/tile.tscn" id="3_ert6e"]
+[ext_resource type="PackedScene" uid="uid://d3xj7lwu2tl8i" path="res://Scenes/turn_queue.tscn" id="4_kh0vp"]
+[ext_resource type="Script" path="res://Scripts/GameState.gd" id="5_7hm6v"]
+
+[node name="Level" type="Node2D"]
+position = Vector2(16, 8)
+script = ExtResource("1_gae1q")
+level_number = 3
+
+[node name="Board" type="Node2D" parent="." node_paths=PackedStringArray("game_state")]
+y_sort_enabled = true
+script = ExtResource("2_4gdto")
+game_state = NodePath("../GameState")
+
+[node name="Tiles" type="Node2D" parent="Board"]
+
+[node name="Tile1" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
+position = Vector2(-32, -16)
+has_player = true
+
+[node name="Tile2" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
+position = Vector2(-16, -8)
+
+[node name="Tile3" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
+
+[node name="Tile4" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
+position = Vector2(17, 8)
+
+[node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
+position = Vector2(33, 0)
+tile_state = 2
+
+[node name="Tile6" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
+position = Vector2(49, -8)
+
+[node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("4_kh0vp")]
+board = NodePath("../Board")
+game_state = NodePath("../GameState")
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("5_7hm6v")
+player_moves_max_for_level = 2
+player_fire_charge_max_for_level = 1
+rounds_remaining_for_current_level = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
