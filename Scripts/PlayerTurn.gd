@@ -3,6 +3,7 @@ extends Turn
 func play_turn():
 	print("Player's turn")
 	game_state.active_turn = game_state.Turn.Player
+	EventBus.emit_signal("turn_changed", "PLAYER")
 	
 	reset_player_abilities()
 	board.draw_reachable_tiles(game_state.player_tile_name)
