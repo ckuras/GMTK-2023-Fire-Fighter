@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsd03sr0hm2kh"]
+[gd_scene load_steps=9 format=3 uid="uid://bsd03sr0hm2kh"]
 
 [ext_resource type="Script" path="res://Scripts/scene_switcher.gd" id="1_gwv8o"]
 [ext_resource type="PackedScene" uid="uid://c5q0wyii8bmft" path="res://Scenes/Levels/level_1.tscn" id="2_kttum"]
 [ext_resource type="FontFile" uid="uid://bjid8fas1lv2w" path="res://Assets/Fonts/SpaceMono-Bold.ttf" id="3_e1v1r"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="4_w8qt7"]
+[ext_resource type="AudioStream" uid="uid://cdh8oktd5relw" path="res://Assets/jungle.wav" id="5_y4v4c"]
 
 [sub_resource type="Gradient" id="Gradient_duesk"]
 colors = PackedColorArray(0.807843, 0.12549, 0.160784, 1, 0.517647, 0.533333, 0.517647, 1)
@@ -165,6 +166,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_e1v1r")
 theme_override_font_sizes/font_size = 32
 text = "END TURN"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_y4v4c")
+volume_db = -4.0
+autoplay = true
 
 [connection signal="button_down" from="CanvasLayer/UI/MarginContainer/VBoxContainer/MarginContainer2/Button" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/UI/MarginContainer/VBoxContainer/MarginContainer2/Button" to="CanvasLayer/UI" method="_on_button_button_down"]
