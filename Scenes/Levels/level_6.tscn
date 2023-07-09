@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm6q25mfsf10a"]
+[gd_scene load_steps=7 format=3 uid="uid://boaffs112al8i"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_7kdwl"]
 [ext_resource type="Script" path="res://Scripts/board.gd" id="2_c60cg"]
@@ -23,21 +23,108 @@ script = ExtResource("3_54s3n")
 has_player = true
 
 [node name="Tile2" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
-position = Vector2(16, 8)
-
-[node name="Tile6" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
 position = Vector2(16, -8)
 
 [node name="Tile3" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
-position = Vector2(-16, -8)
+position = Vector2(32, -16)
 
 [node name="Tile4" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
-position = Vector2(-32, -16)
-tile_state = 2
+position = Vector2(32, 0)
 
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
-position = Vector2(32, 16)
+position = Vector2(48, -8)
+
+[node name="Tile10" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(48, 8)
+
+[node name="Tile11" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(64, 0)
+
+[node name="Tile6" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-16, -24)
+
+[node name="Tile7" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(0, -32)
+
+[node name="Tile8" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(0, -16)
+
+[node name="Tile9" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(16, -24)
+
+[node name="Tile12" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-48, -8)
+
+[node name="Tile26" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-64, -16)
+
+[node name="Tile27" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-64, 16)
+
+[node name="Tile31" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(64, -16)
+
+[node name="Tile32" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(64, 16)
+
+[node name="Tile28" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-80, 8)
+
+[node name="Tile29" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-80, -8)
+
+[node name="Tile33" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(80, 8)
+
+[node name="Tile34" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(80, -8)
+
+[node name="Tile30" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-96, 0)
 tile_state = 2
+
+[node name="Tile35" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(96, 0)
+tile_state = 2
+
+[node name="Tile13" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-32, -16)
+
+[node name="Tile14" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-32, 0)
+
+[node name="Tile20" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-16, 8)
+
+[node name="Tile15" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-16, -8)
+
+[node name="Tile16" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(0, 16)
+
+[node name="Tile17" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(16, 8)
+
+[node name="Tile18" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(16, 24)
+
+[node name="Tile21" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-64, 0)
+
+[node name="Tile22" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-48, 8)
+
+[node name="Tile23" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-32, 16)
+
+[node name="Tile24" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(-16, 24)
+
+[node name="Tile25" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(0, 32)
+
+[node name="Tile19" parent="Board/Tiles" instance=ExtResource("4_ilsyy")]
+position = Vector2(32, 16)
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("5_nbwyk")]
 board = NodePath("../Board")
@@ -45,9 +132,9 @@ game_state = NodePath("../GameState")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("6_xxv5n")
-player_moves_max_for_level = 1
+player_moves_max_for_level = 2
 player_fire_charge_max_for_level = 2
-rounds_remaining_for_current_level = 4
+rounds_remaining_for_current_level = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)

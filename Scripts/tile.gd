@@ -197,7 +197,7 @@ func handle_left_mouse_down():
 	)
 	var can_tile_be_lit_on_fire = (
 		can_player_light_stuff_on_fire and 
-		is_player_within_cardinal_neighbors() and 
+		is_player_within_all_neighbors() and 
 		is_flammable()
 	)
 
@@ -226,6 +226,11 @@ func handle_right_mouse_up():
 	
 func is_flammable() -> bool:
 	return tile_state != TileState.Fire 
+
+func is_player_within_all_neighbors():
+	for tile in get_all_neighbors():
+		if tile.has_player: return true
+	return false
 
 func is_player_within_cardinal_neighbors():
 	for tile in get_cardinal_neighbors():

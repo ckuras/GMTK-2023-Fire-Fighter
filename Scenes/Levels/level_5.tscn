@@ -63,14 +63,37 @@ position = Vector2(16, 8)
 position = Vector2(48, 24)
 tile_state = 2
 
+[node name="Tile15" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(-32, -32)
+tile_state = 2
+
+[node name="Tile16" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(48, 8)
+
+[node name="Tile17" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(0, -16)
+
+[node name="Tile18" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(-16, -24)
+
+[node name="Tile19" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(16, -8)
+
+[node name="Tile20" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(32, 0)
+
+[node name="Tile21" parent="Board/Tiles" instance=ExtResource("4_f6hm7")]
+position = Vector2(64, 16)
+tile_state = 2
+
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("5_3ulyt")]
 board = NodePath("../Board")
 game_state = NodePath("../GameState")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("6_r303b")
-player_moves_max_for_level = 2
-player_fire_charge_max_for_level = 1
+player_moves_max_for_level = 5
+player_fire_charge_max_for_level = 2
 rounds_remaining_for_current_level = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
