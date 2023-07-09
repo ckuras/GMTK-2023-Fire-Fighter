@@ -34,6 +34,15 @@ position = Vector2(-16, -8)
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
 position = Vector2(-32, 0)
 
+[node name="Tile10" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(-48, 8)
+
+[node name="Tile11" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(-16, 24)
+
+[node name="Tile12" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
+position = Vector2(-32, 16)
+
 [node name="Tile6" parent="Board/Tiles" instance=ExtResource("4_e05qc")]
 position = Vector2(-16, 8)
 has_player = true

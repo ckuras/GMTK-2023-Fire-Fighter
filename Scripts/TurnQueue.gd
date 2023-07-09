@@ -29,12 +29,16 @@ func play_active_turn():
 
 
 func did_player_win() -> bool:
-	return are_there_no_more_infected_tiles()
+	return (
+		are_there_no_more_infected_tiles() and
+		!is_player_in_fire_tile() and 
+		!is_player_in_infected_tile()
+	)
 	
 func did_player_lose() -> bool:
 	return (
-		is_player_out_of_turns() or 
-		is_player_in_fire_tile() or
+		is_player_out_of_turns() or
+		is_player_in_fire_tile() or 
 		is_player_in_infected_tile()
 	)
 	
