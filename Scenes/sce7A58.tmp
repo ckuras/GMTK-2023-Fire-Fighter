@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsd03sr0hm2kh"]
-
-[ext_resource type="PackedScene" uid="uid://dgduy872g3t47" path="res://Scenes/Levels/level_1.tscn" id="1_c6odc"]
-[ext_resource type="Script" path="res://Scripts/scene_switcher.gd" id="1_gwv8o"]
-
-[node name="SceneSwitcher" type="Node"]
-script = ExtResource("1_gwv8o")
-
-[node name="Level1" parent="." instance=ExtResource("1_c6odc")]

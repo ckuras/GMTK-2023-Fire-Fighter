@@ -37,6 +37,6 @@ game_state = NodePath("../GameState")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("3_isg57")
-player_moves_max_for_level = 1
+player_moves_max_for_level = 2
 player_fire_charge_max_for_level = 1
 rounds_remaining_for_current_level = 1
