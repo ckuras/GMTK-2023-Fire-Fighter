@@ -46,7 +46,6 @@ transform = Transform2D(0.2, 0, 0, 0.2, -128, -72)
 follow_viewport_enabled = true
 
 [node name="UI" type="Control" parent="CanvasLayer"]
-texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,7 +142,16 @@ text = "1"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 200
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="LoseLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(1216, 99)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_e1v1r")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
 layout_mode = 2

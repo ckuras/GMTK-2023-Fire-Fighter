@@ -10,7 +10,7 @@ func _ready():
 func _handle_level_change(next_level_name: String):
 	current_level.queue_free()
 	current_level_name = next_level_name
-	await get_tree().create_timer(0.001).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	var next_level = load("res://Scenes/Levels/" + next_level_name + ".tscn").instantiate()
 	self.add_child(next_level)
