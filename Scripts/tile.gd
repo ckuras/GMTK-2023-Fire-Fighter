@@ -37,6 +37,7 @@ func _ready():
 	change_tile_state.connect(_on_state_change)
 	change_can_player_reach.connect(_on_can_player_reach_change)
 	emit_signal("change_tile_state", tile_state)
+	$Fire.play("flames")
 
 func tile_state_to_string(_tile_state: TileState):
 	match _tile_state:
@@ -46,9 +47,12 @@ func tile_state_to_string(_tile_state: TileState):
 func _on_state_change(_tile_state: TileState):
 	tile_state = _tile_state
 	match tile_state:
-		0: pass
-		1: modulate = Color.RED
-		2: modulate = Color.WEB_PURPLE
+		0: $Fire.hide()
+		1: 
+			$Fire.show()
+		2: 
+			$Fire.hide()
+			modulate = Color.WEB_PURPLE
 
 func _on_can_player_reach_change(_can_player_reach):
 	can_player_reach = _can_player_reach
@@ -70,7 +74,7 @@ func _on_player_tile_name_set(player_tile_name):
 		$Player.show()
 		
 		# Put this tile above all others
-		z_index = 2
+#		z_index = 3
 	else:
 		# Update our state to know that we no longer have the player
 		has_player = false
@@ -79,7 +83,7 @@ func _on_player_tile_name_set(player_tile_name):
 		$Player.hide()
 		
 		# Put this tile below the player level
-		z_index = 1
+#		z_index = 1
 
 func get_all_neighbors_include_nulls() -> Array[Tile]:
 	return [

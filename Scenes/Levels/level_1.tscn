@@ -17,6 +17,7 @@ script = ExtResource("2_mo3gu")
 game_state = NodePath("../GameState")
 
 [node name="Tiles" type="Node2D" parent="Board"]
+y_sort_enabled = true
 
 [node name="Tile1" parent="Board/Tiles" instance=ExtResource("4_40nkd")]
 position = Vector2(-32, -16)

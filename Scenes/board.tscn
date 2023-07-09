@@ -9,6 +9,7 @@ y_sort_enabled = true
 script = ExtResource("1_ut173")
 
 [node name="Tiles" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("2_kccow")
 
 [node name="Tile" parent="Tiles" instance=ExtResource("1_kkxld")]

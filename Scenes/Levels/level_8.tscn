@@ -17,6 +17,7 @@ script = ExtResource("2_uw120")
 game_state = NodePath("../GameState")
 
 [node name="Tiles" type="Node2D" parent="Board"]
+y_sort_enabled = true
 script = ExtResource("3_6ypau")
 
 [node name="Tile" parent="Board/Tiles" instance=ExtResource("4_pduxh")]

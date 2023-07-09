@@ -1,9 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://byb3wjan8u1rx"]
+[gd_scene load_steps=9 format=3 uid="uid://byb3wjan8u1rx"]
 
 [ext_resource type="Texture2D" uid="uid://cdwcysljin2vi" path="res://Assets/iso_tile.png" id="1_bxljw"]
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_ulwfg"]
 [ext_resource type="PackedScene" uid="uid://dtag84i2rw8vh" path="res://Scenes/player.tscn" id="3_6l0tj"]
 [ext_resource type="Texture2D" uid="uid://bavwh028kg0ak" path="res://Assets/iso_tile_hover.png" id="3_liu54"]
+[ext_resource type="Texture2D" uid="uid://dfi1c2dmop8x" path="res://Assets/fire_sprite-sheet.png" id="4_g0c6l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fdfe"]
+atlas = ExtResource("4_g0c6l")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yr52"]
+atlas = ExtResource("4_g0c6l")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p2frk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fdfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yr52")
+}],
+"loop": true,
+"name": &"flames",
+"speed": 12.0
+}]
 
 [node name="Tile" type="Area2D"]
 texture_filter = 1
@@ -19,8 +42,14 @@ modulate = Color(1, 1, 1, 0.705882)
 position = Vector2(0, 8)
 texture = ExtResource("3_liu54")
 
-[node name="Reachable" type="Sprite2D" parent="."]
+[node name="Fire" type="AnimatedSprite2D" parent="."]
 visible = false
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_p2frk")
+animation = &"flames"
+frame_progress = 0.00291904
+
+[node name="Reachable" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.470588)
 position = Vector2(0, 8)
 texture = ExtResource("3_liu54")
