@@ -48,7 +48,8 @@ func _on_state_change(_tile_state: TileState):
 	tile_state = _tile_state
 	match tile_state:
 		0: $Fire.hide()
-		1: 
+		1:
+			modulate = Color.WHITE
 			$Fire.show()
 		2: 
 			$Fire.hide()
