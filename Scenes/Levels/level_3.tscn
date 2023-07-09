@@ -32,10 +32,10 @@ position = Vector2(17, 8)
 
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
 position = Vector2(33, 0)
-tile_state = 2
 
 [node name="Tile6" parent="Board/Tiles" instance=ExtResource("3_ert6e")]
 position = Vector2(49, -8)
+tile_state = 2
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("4_kh0vp")]
 board = NodePath("../Board")
@@ -43,7 +43,7 @@ game_state = NodePath("../GameState")
 
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("5_7hm6v")
-player_moves_max_for_level = 2
+player_moves_max_for_level = 3
 player_fire_charge_max_for_level = 1
 rounds_remaining_for_current_level = 2
 
