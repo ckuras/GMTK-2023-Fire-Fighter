@@ -3,14 +3,20 @@ extends Node
 @onready var current_level = $Level
 @onready var current_level_name = "level_1"
 
+var level_after_last_level = "level_7"
+
 func _ready():
 	current_level.connect("level_changed", _handle_level_change)
 	EventBus.connect("restart_level", _handle_level_change)
 
 func _handle_level_change(next_level_name: String):
 	current_level.queue_free()
+	
+	if next_level_name == level_after_last_level:
+		get_tree().change_scene_to_file("res://Scenes/end.tscn")
 	current_level_name = next_level_name
 	await get_tree().create_timer(0.2).timeout
+	
 	
 	var next_level = load("res://Scenes/Levels/" + next_level_name + ".tscn").instantiate()
 	self.add_child(next_level)

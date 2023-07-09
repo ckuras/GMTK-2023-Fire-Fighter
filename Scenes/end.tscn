@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://deforsdtkxb3t"]
+[gd_scene load_steps=5 format=3 uid="uid://csi7fmpa6mqos"]
 
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_r2bbe"]
-[ext_resource type="FontFile" uid="uid://bjid8fas1lv2w" path="res://Assets/Fonts/SpaceMono-Bold.ttf" id="2_it8eh"]
+[ext_resource type="Script" path="res://Scripts/end_ui.gd" id="1_6resc"]
+[ext_resource type="FontFile" uid="uid://bjid8fas1lv2w" path="res://Assets/Fonts/SpaceMono-Bold.ttf" id="2_a1n1e"]
 
 [sub_resource type="Gradient" id="Gradient_oakmm"]
 colors = PackedColorArray(0.807843, 0.12549, 0.160784, 1, 0.517647, 0.533333, 0.517647, 1)
@@ -12,7 +12,7 @@ width = 1280
 height = 720
 fill_from = Vector2(0, 0.986748)
 
-[node name="MainMenu" type="Node"]
+[node name="Introduction" type="Node"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -24,7 +24,7 @@ texture = SubResource("GradientTexture2D_gbvqw")
 stretch_mode = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-script = ExtResource("1_r2bbe")
+script = ExtResource("1_6resc")
 
 [node name="Main" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -43,7 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main/CenterContainer"]
-custom_minimum_size = Vector2(512, 256)
+custom_minimum_size = Vector2(720, 480)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer"]
@@ -57,29 +57,43 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(420, 280)
+layout_mode = 2
+
+[node name="StoryLabel" type="Label" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("2_it8eh")
+theme_override_fonts/font = ExtResource("2_a1n1e")
 theme_override_font_sizes/font_size = 32
-text = "FIRE LIGHTER"
+text = "VICTORY!
+You have saved the city from the infected forest... but at what cost..."
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("2_it8eh")
-theme_override_font_sizes/font_size = 24
-text = "PLAY"
-
-[node name="QuitButton" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Credits" type="Label" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("2_it8eh")
-theme_override_font_sizes/font_size = 24
-text = "QUIT"
+theme_override_fonts/font = ExtResource("2_a1n1e")
+theme_override_font_sizes/font_size = 22
+text = "Programming:
+Christian Bouwense
+Chris Kuras
 
-[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton" to="CanvasLayer" method="_on_play_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/QuitButton" to="CanvasLayer" method="_on_quit_button_pressed"]
+Art: Chris Kuras
+
+Music: Mark Kuras"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_a1n1e")
+theme_override_font_sizes/font_size = 48
+text = "Continue"
+
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ContinueButton" to="CanvasLayer" method="_on_continue_button_pressed"]

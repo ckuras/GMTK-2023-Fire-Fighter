@@ -79,7 +79,8 @@ theme_override_fonts/font = ExtResource("2_waa07")
 theme_override_font_sizes/font_size = 32
 text = "Controls:
 - Move: right click
-- Light fire: left click"
+- Light fire: left click
+- Reset: r"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
