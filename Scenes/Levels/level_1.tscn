@@ -12,9 +12,6 @@ level_number = 1
 player_moves_remaining = 2
 player_fire_charge_count = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
-
 [node name="Board" type="Node2D" parent="." node_paths=PackedStringArray("game_state")]
 y_sort_enabled = true
 script = ExtResource("1_uiim3")

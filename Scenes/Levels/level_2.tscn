@@ -11,9 +11,6 @@
 script = ExtResource("1_8665l")
 level_number = 2
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
-
 [node name="Board" type="Node2D" parent="." node_paths=PackedStringArray("game_state")]
 y_sort_enabled = true
 script = ExtResource("2_mo3gu")
