@@ -3,7 +3,7 @@ extends Node
 @onready var current_level = $Level
 @onready var current_level_name = "level_1"
 
-var level_after_last_level = "level_7"
+var level_after_last_level = "level_9"
 
 func _ready():
 	current_level.connect("level_changed", _handle_level_change)
