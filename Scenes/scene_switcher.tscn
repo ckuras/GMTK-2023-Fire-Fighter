@@ -69,71 +69,93 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="PlayerActions" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer"]
+[node name="PlayerActions" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/PlayerActions"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerActions"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/PlayerActions/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerActions/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Moves: "
 
-[node name="MovesLeftLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/PlayerActions/HBoxContainer"]
+[node name="MovesLeftLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerActions/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/PlayerActions"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerActions"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/PlayerActions/HBoxContainer2"]
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerActions/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Fire Charges: "
 
-[node name="FireChargesLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/PlayerActions/HBoxContainer2"]
+[node name="FireChargesLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/PlayerActions/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "1"
 
-[node name="Control" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer"]
+[node name="Control" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 116
 
-[node name="ActiveTurn" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer"]
+[node name="ActiveTurn" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/ActiveTurn"]
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ActiveTurn"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Turn:"
 horizontal_alignment = 1
 
-[node name="ActiveTurnLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/ActiveTurn"]
+[node name="ActiveTurnLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ActiveTurn"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "PLAYER"
 horizontal_alignment = 1
 
-[node name="TurnCount" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer"]
+[node name="TurnCount" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/TurnCount"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/TurnCount"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/TurnCount/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/TurnCount/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Rounds until Rain: "
 
-[node name="RoundsUntilRainLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/HBoxContainer/TurnCount/HBoxContainer"]
+[node name="RoundsUntilRainLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/TurnCount/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "1"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 420
+theme_override_constants/margin_top = 180
+theme_override_constants/margin_right = 420
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_e1v1r")
+theme_override_font_sizes/font_size = 32
+text = "button"
+
+[connection signal="button_down" from="CanvasLayer/UI/MarginContainer/VBoxContainer/MarginContainer2/Button" to="CanvasLayer/UI" method="_on_button_button_down"]

@@ -1,10 +1,11 @@
 extends Control
 
-@onready var moves_left_label = $MarginContainer/HBoxContainer/PlayerActions/HBoxContainer/MovesLeftLabel
-@onready var fire_charges_label = $MarginContainer/HBoxContainer/PlayerActions/HBoxContainer2/FireChargesLabel
-@onready var active_turn_label = $MarginContainer/HBoxContainer/ActiveTurn/ActiveTurnLabel
-@onready var rounds_until_rain_label = $MarginContainer/HBoxContainer/TurnCount/HBoxContainer/RoundsUntilRainLabel
+@onready var moves_left_label = $MarginContainer/VBoxContainer/HBoxContainer/PlayerActions/HBoxContainer/MovesLeftLabel
+@onready var fire_charges_label = $MarginContainer/VBoxContainer/HBoxContainer/PlayerActions/HBoxContainer2/FireChargesLabel
+@onready var active_turn_label = $MarginContainer/VBoxContainer/HBoxContainer/ActiveTurn/ActiveTurnLabel
+@onready var rounds_until_rain_label = $MarginContainer/VBoxContainer/HBoxContainer/TurnCount/HBoxContainer/RoundsUntilRainLabel
 
+@onready var end_turn_button = $MarginContainer/VBoxContainer/MarginContainer2/Button
 
 func _ready():
 	EventBus.connect("turn_changed", _on_turn_changed)
@@ -14,6 +15,10 @@ func _ready():
 
 func _on_turn_changed(turn: String):
 	active_turn_label.text = turn
+	if turn == "PLAYER":
+		end_turn_button.show()
+	else:
+		end_turn_button.hide()
 
 func _on_moves_changed(moves):
 	moves_left_label.text = str(moves)
@@ -23,3 +28,7 @@ func _on_fire_charges_changed(charges):
 
 func _on_rounds_left_changed(turns_left):
 	rounds_until_rain_label.text = str(turns_left)
+
+
+func _on_button_button_down():
+	EventBus.emit_signal("turn_ended")
