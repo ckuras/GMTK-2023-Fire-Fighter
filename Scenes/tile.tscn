@@ -34,7 +34,6 @@ collide_with_bodies = false
 polygon = PackedVector2Array(0, -7, 15, 0, 0, 7, -15, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_6l0tj")]
-visible = false
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

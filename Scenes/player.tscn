@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dtag84i2rw8vh"]
 
-[ext_resource type="Texture2D" uid="uid://cseo57wsmuoed" path="res://Assets/player.png" id="1_7aasu"]
+[ext_resource type="Texture2D" uid="uid://cseo57wsmuoed" path="res://Assets/player.png" id="1_5a62v"]
 
 [node name="Player" type="Sprite2D"]
 position = Vector2(0, -16)
-texture = ExtResource("1_7aasu")
+texture = ExtResource("1_5a62v")
+flip_h = true
 hframes = 2

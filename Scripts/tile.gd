@@ -237,3 +237,21 @@ func set_sprite_direction():
 	var neighbors: Array[Tile] = get_cardinal_neighbors_include_nulls()
 	var tile_index = neighbors.find(current_player_tile)
 	print("tile we just moved from", neighbors[tile_index])
+	print("tile index we just moved from ", tile_index)
+	match tile_index:
+		0:
+			# coming from NE
+			$Player.frame = 0
+			$Player.flip_h = false
+		1:
+			# coming from NW
+			$Player.frame = 0
+			$Player.flip_h = true
+		2:
+			# coming from SE
+			$Player.frame = 1
+			$Player.flip_h = true
+		3:
+			# coming from SW
+			$Player.frame = 1
+			$Player.flip_h = false
