@@ -17,6 +17,8 @@ var fire_charges_left: int
 var flashing_button = false
 
 var round_lost = false
+var round_won = false
+
 
 func _ready():
 	EventBus.connect("turn_changed", _on_turn_changed)
@@ -58,7 +60,12 @@ func _on_round_lost():
 	flash_button()
 
 func _on_round_won():
+	round_won = true
 	_show_round_result("SUCCESS")
+	
+	end_turn_button.text = "NEXT LEVEL"
+	end_turn_button.show()
+	flash_button()
 
 func _show_round_result(result):
 	lose_label.modulate.a = 0.0
@@ -71,13 +78,18 @@ func _show_round_result(result):
 	tween.tween_property(lose_label, "modulate:a", 0.0, 2)
 
 func _on_button_button_down():
-	if !round_lost:
-		EventBus.emit_signal("turn_ended")
-	else:
+	if round_lost:
 		EventBus.emit_signal("restart_level", scene_switcher.current_level_name)
 		round_lost = false
 		end_turn_button.text = "END TURN"
 		lose_label.text = ""
+	elif round_won:
+		scene_switcher.current_level.emit_signal("level_changed", "level_" + str(scene_switcher.current_level.level_number + 1))
+		round_won = false
+		end_turn_button.text = "END TURN"
+		lose_label.text = ""
+	elif !round_lost and !round_won:
+		EventBus.emit_signal("turn_ended")
 
 func out_of_moves():
 	if moves_left == 0 or fire_charges_left == 0 and !flashing_button:

@@ -9,4 +9,4 @@ signal level_changed(level_name)
 func _ready():
 	print("waiting for player to win round...")
 	await EventBus.player_won_round
-	emit_signal("level_changed", "level_" + str(level_number + 1))
+#	emit_signal("level_changed", "level_" + str(level_number + 1))
