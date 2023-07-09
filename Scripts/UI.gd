@@ -98,8 +98,8 @@ func out_of_moves():
 func flash_button():
 	flashing_button = true
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tween.tween_property(end_turn_button, "modulate:a", 0.4, .2)
-	tween.tween_property(end_turn_button, "modulate:a", 1.0, .2)
+	tween.tween_property(end_turn_button, "modulate:a", 0.4, .1)
+	tween.tween_property(end_turn_button, "modulate:a", 1.0, .1)
 	tween.tween_property(end_turn_button, "modulate:a", 0.4, .2)
 	tween.tween_property(end_turn_button, "modulate:a", 1.0, .2)
 	tween.tween_property(end_turn_button, "modulate:a", 0.4, .2)
