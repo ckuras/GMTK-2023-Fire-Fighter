@@ -26,10 +26,17 @@ position = Vector2(-16, -8)
 has_player = true
 
 [node name="Tile5" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
-position = Vector2(0, -16)
 
 [node name="Tile6" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
 position = Vector2(-48, -24)
+tile_state = 2
+
+[node name="Tile8" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
+position = Vector2(-16, -24)
+tile_state = 2
+
+[node name="Tile7" parent="Board/Tiles" instance=ExtResource("3_u7okm")]
+position = Vector2(-48, -8)
 tile_state = 2
 
 [node name="TurnQueue" parent="." node_paths=PackedStringArray("board", "game_state") instance=ExtResource("2_p06tp")]
@@ -39,7 +46,7 @@ game_state = NodePath("../GameState")
 [node name="GameState" type="Node" parent="."]
 script = ExtResource("3_isg57")
 player_moves_max_for_level = 1
-player_fire_charge_max_for_level = 2
+player_fire_charge_max_for_level = 1
 rounds_remaining_for_current_level = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
