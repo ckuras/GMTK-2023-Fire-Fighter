@@ -41,9 +41,12 @@ func _set_player_tile_name(_player_tile_name):
 
 func _set_player_moves_remaining(_player_moves_remaining):
 	player_moves_remaining = _player_moves_remaining
+	EventBus.emit_signal("moves_changed", player_moves_remaining)
 
 func _set_player_fire_charge_count(_player_fire_charge_count):
 	player_fire_charge_count = _player_fire_charge_count
+	EventBus.emit_signal("fire_charges_changed", player_fire_charge_count)
 
 func _set_rounds_remaining_for_current_level(_rounds_remaining_for_current_level):
 	rounds_remaining_for_current_level = _rounds_remaining_for_current_level
+	EventBus.emit_signal("rounds_left_changed", rounds_remaining_for_current_level)

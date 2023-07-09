@@ -9,3 +9,6 @@ signal player_lost_round
 signal restart_level
 
 signal turn_changed(turn)
+signal moves_changed(moves)
+signal fire_charges_changed(charges)
+signal rounds_left_changed(turns_left)
