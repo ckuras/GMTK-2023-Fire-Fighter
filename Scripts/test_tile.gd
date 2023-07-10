@@ -50,3 +50,18 @@ func test_that_a_list_of_tiles_that_contains_one_player_is_considered_to_contain
 	])
 
 	assert_true(result, "A list of tiles with one player should be considered to be containing a player.")
+
+func test_that_a_list_of_tiles_that_contains_multiple_players_is_considered_to_contain_a_player():
+	var tile_without_a_player = autofree(Tile.new())
+	var tile_with_a_player = autofree(Tile.new())
+
+	tile_without_a_player.has_player = false
+	tile_with_a_player.has_player = true
+
+	var result = Tile.is_player_in_this_list_of_tiles([
+		tile_with_a_player,
+		tile_without_a_player,
+		tile_with_a_player
+	])
+
+	assert_true(result, "A list of tiles with multiple players should be considered to be containing a player.")

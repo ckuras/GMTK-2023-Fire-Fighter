@@ -29,7 +29,7 @@ enum Direction {
 
 var game_state: GameState
 
-func initialize(_game_state: GameState):
+func initialize(_game_state: GameState) -> void:
 	game_state = _game_state
 	game_state.player_tile_name_set.connect(_on_player_tile_name_set)
 
@@ -39,7 +39,7 @@ func _ready():
 	emit_signal("change_tile_state", tile_state)
 	$Fire.play("flames")
 
-func _on_state_change(_tile_state: TileState):
+func _on_state_change(_tile_state: TileState) -> void:
 	tile_state = _tile_state
 	match tile_state:
 		0: $Fire.hide()
@@ -50,7 +50,7 @@ func _on_state_change(_tile_state: TileState):
 			$Fire.hide()
 			modulate = Color.WEB_PURPLE
 
-func _on_can_player_reach_change(_can_player_reach):
+func _on_can_player_reach_change(_can_player_reach) -> void:
 	can_player_reach = _can_player_reach
 	if can_player_reach:
 		$Reachable.show()
@@ -59,27 +59,18 @@ func _on_can_player_reach_change(_can_player_reach):
 		$Hover.hide()
 
 # Called when the player just moved
-func _on_player_tile_name_set(player_tile_name):
+func _on_player_tile_name_set(player_tile_name) -> void:
 	# If player is on this tile
 	if player_tile_name == self.name:
-		
 		# Update our state to know that we have the player
 		has_player = true
-		
 		# Visually display the player sprite
 		$Player.show()
-		
-		# Put this tile above all others
-#		z_index = 3
 	else:
 		# Update our state to know that we no longer have the player
 		has_player = false
-		
 		# Visually hide the player sprite
 		$Player.hide()
-		
-		# Put this tile below the player level
-#		z_index = 1
 
 func get_all_neighbors_include_nulls() -> Array[Tile]:
 	return [
@@ -108,19 +99,19 @@ func get_all_neighbors() -> Array[Tile]:
 	))
 	return not_null_neighbors
 
-func get_cardinal_neighbors():
+func get_cardinal_neighbors() -> Array[Tile]:
 	var not_null_neighbors: Array[Tile]
 	not_null_neighbors.assign(get_cardinal_neighbors_include_nulls().filter(
 		func(n): return n != null
 	))
 	return not_null_neighbors
 
-func get_neighbor_by_direction(direction: Direction):
+func get_neighbor_by_direction(direction: Direction) -> Object:
 	ray_cast.target_position = get_target_by_direction(direction)
 	ray_cast.force_raycast_update()
 	return ray_cast.get_collider()
 
-func get_target_by_direction(direction: Direction):
+func get_target_by_direction(direction: Direction) -> Vector2:
 	match direction:
 		Direction.N:
 			return Vector2(0, -16)
@@ -137,9 +128,10 @@ func get_target_by_direction(direction: Direction):
 		Direction.SE:
 			return Vector2(16, 8)
 		Direction.SW:
-			return Vector2(-16, 8)	
+			return Vector2(-16, 8)
+	return Vector2(0, 0)
 
-func spread_to_neighbors():
+func spread_to_neighbors() -> void:
 	var neighbors: Array[Tile] = get_cardinal_neighbors()
 	for tile in neighbors:
 		if tile.tile_state != TileState.Fire:
@@ -151,22 +143,22 @@ var previous_left_clicked = false
 var previous_right_clicked = false
 var mouse_over = false
 
-func _on_mouse_entered():
+func _on_mouse_entered() -> void:
 	mouse_over = true
 	if game_state.active_turn == game_state.Turn.Player:
 		$Hover.show()
 
-func _on_mouse_exited():
+func _on_mouse_exited() -> void:
 	mouse_over = false
 	if game_state.active_turn == game_state.Turn.Player:
 		$Hover.hide()
 
-func _unhandled_input(event):
+func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton:
 		handle_mouse_event(event)
 
 # There are four combinations here: left down, left up, right down, right up.
-func handle_mouse_event(event: InputEventMouseButton):
+func handle_mouse_event(event: InputEventMouseButton) -> void:
 	var previous_clicked = previous_left_clicked or previous_right_clicked
 	var is_mouse_down = !previous_clicked and event.is_pressed()
 	var is_mouse_up = previous_clicked and !event.is_pressed()
@@ -190,7 +182,7 @@ func handle_mouse_event(event: InputEventMouseButton):
 	if (is_right_releasing):
 		handle_right_mouse_up()
 
-func handle_left_mouse_down():
+func handle_left_mouse_down() -> void:
 	var can_player_light_stuff_on_fire = (
 		game_state.player_fire_charge_count > 0 and
 		game_state.active_turn == game_state.Turn.Player
@@ -208,7 +200,7 @@ func handle_left_mouse_down():
 	
 	previous_left_clicked = true
 
-func handle_right_mouse_down():
+func handle_right_mouse_down() -> void:
 	var can_player_move = game_state.player_moves_remaining > 0
 	var can_player_reach_this_tile = can_player_reach
 	var is_player_turn = game_state.active_turn == game_state.Turn.Player
@@ -218,29 +210,18 @@ func handle_right_mouse_down():
 	
 	previous_right_clicked = true
 
-func handle_left_mouse_up():
+func handle_left_mouse_up() -> void:
 	previous_left_clicked = false
 
-func handle_right_mouse_up():
+func handle_right_mouse_up() -> void:
 	previous_right_clicked = false
-	
-static func is_flammable(_tile_state: TileState) -> bool:
-	return _tile_state != TileState.Fire
 
-static func is_player_in_this_list_of_tiles(tiles: Array[Tile]):
-	for tile in tiles:
-		if tile.has_player: return true
-	return false
-
-func move_player_to_tile():
+func move_player_to_tile() -> void:
 	set_sprite_direction()
 	game_state.player_tile_name = self.name
-	# TODO: we probably want to highlight the "end turn" button or something here
-	# if game_state.player_moves_remaining == 1:
-		# EventBus.emit_signal("turn_ended")
 	game_state.player_moves_remaining -= 1
 
-func set_sprite_direction():
+func set_sprite_direction() -> void:
 	var current_player_tile = get_parent().find_child(game_state.player_tile_name)
 	var neighbors: Array[Tile] = get_cardinal_neighbors_include_nulls()
 	var tile_index = neighbors.find(current_player_tile)
@@ -263,3 +244,11 @@ func set_sprite_direction():
 			# coming from SW
 			$Player.frame = 1
 			$Player.flip_h = false
+
+static func is_flammable(_tile_state: TileState) -> bool:
+	return _tile_state != TileState.Fire
+
+static func is_player_in_this_list_of_tiles(tiles: Array[Tile]) -> bool:
+	for tile in tiles:
+		if tile.has_player: return true
+	return false
