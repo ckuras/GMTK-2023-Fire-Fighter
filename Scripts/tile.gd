@@ -39,11 +39,6 @@ func _ready():
 	emit_signal("change_tile_state", tile_state)
 	$Fire.play("flames")
 
-func tile_state_to_string(_tile_state: TileState):
-	match _tile_state:
-		0: return "None"
-		1: return "Fire"
-
 func _on_state_change(_tile_state: TileState):
 	tile_state = _tile_state
 	match tile_state:
@@ -202,8 +197,8 @@ func handle_left_mouse_down():
 	)
 	var can_tile_be_lit_on_fire = (
 		can_player_light_stuff_on_fire and 
-		is_player_within_all_neighbors() and 
-		is_flammable()
+		is_player_in_this_list_of_tiles(get_all_neighbors()) and 
+		is_flammable(tile_state)
 	)
 
 	if can_tile_be_lit_on_fire:
@@ -229,16 +224,11 @@ func handle_left_mouse_up():
 func handle_right_mouse_up():
 	previous_right_clicked = false
 	
-func is_flammable() -> bool:
-	return tile_state != TileState.Fire 
+static func is_flammable(_tile_state: TileState) -> bool:
+	return _tile_state != TileState.Fire
 
-func is_player_within_all_neighbors():
-	for tile in get_all_neighbors():
-		if tile.has_player: return true
-	return false
-
-func is_player_within_cardinal_neighbors():
-	for tile in get_cardinal_neighbors():
+static func is_player_in_this_list_of_tiles(tiles: Array[Tile]):
+	for tile in tiles:
 		if tile.has_player: return true
 	return false
 
