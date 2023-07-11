@@ -117,7 +117,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ActiveTurn"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Turn:"
+text = "Current Phase:"
 horizontal_alignment = 1
 
 [node name="ActiveTurnLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/ActiveTurn"]
@@ -125,6 +125,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "PLAYER"
 horizontal_alignment = 1
+
+[node name="Control2" type="MarginContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 116
 
 [node name="TurnCount" type="VBoxContainer" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -135,7 +139,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/TurnCount/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Rounds until Rain: "
+text = "Rounds left: "
 
 [node name="RoundsUntilRainLabel" type="Label" parent="CanvasLayer/UI/MarginContainer/VBoxContainer/HBoxContainer/TurnCount/HBoxContainer"]
 layout_mode = 2

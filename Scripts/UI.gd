@@ -32,6 +32,18 @@ func _ready():
 
 func _on_turn_changed(turn: String):
 	active_turn_label.text = turn
+	match turn:
+		"PLAYER":
+			active_turn_label.modulate = Color(1,1,1,1)
+			next_action_button.show()
+		"FIRE":
+			active_turn_label.modulate = Color.RED
+			next_action_button.hide()
+		"INFECTED":
+			active_turn_label.modulate = Color.WEB_PURPLE
+			next_action_button.hide()
+		
+	
 	if turn == "PLAYER":
 		next_action_button.show()
 	else:
@@ -41,18 +53,19 @@ func _on_moves_changed(moves):
 	moves_left = moves
 	moves_left_label.text = str(moves)
 	if moves == 0:
-		flash_actions_empty(moves_left_label)
+		flash_node_red(moves_left_label)
 		out_of_moves()
 
 func _on_fire_charges_changed(charges):
 	fire_charges_left = charges
 	fire_charges_label.text = str(charges)
 	if charges == 0:
-		flash_actions_empty(fire_charges_label)
+		flash_node_red(fire_charges_label)
 		out_of_moves()
 
 func _on_rounds_left_changed(turns_left):
 	rounds_until_rain_label.text = str(turns_left)
+	await flash_node_red(rounds_until_rain_label)
 
 func _on_round_lost():
 	round_lost = true
@@ -104,27 +117,18 @@ func flash_button():
 	await flash_property(next_action_button, "modulate:a")
 	flashing_button = false
 
-func flash_actions_empty(action_label: Label):
-	await flash_node_red(action_label)
-	
-
 func flash_property(node: Node, property: String):
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tween.tween_property(node, property, 0.4, .2)
-	tween.tween_property(node, property, 1.0, .2)
-	tween.tween_property(node, property, 0.4, .2)
-	tween.tween_property(node, property, 1.0, .2)
+	tween.set_loops(3)
 	tween.tween_property(node, property, 0.4, .2)
 	tween.tween_property(node, property, 1.0, .2)
 	return tween.finished
 
 func flash_node_red(node):
-	node.modulate = Color.RED
 	var tween := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	tween.tween_property(node, "modulate", Color(1,1,1,1), .25)
+	tween.set_loops(3)
 	tween.tween_property(node, "modulate", Color.RED, .25)
 	tween.tween_property(node, "modulate", Color(1,1,1,1), .25)
-	tween.tween_property(node, "modulate", Color.RED, .25)
-	tween.tween_property(node, "modulate", Color(1,1,1,1), .25)
+	return tween.finished
 
 
