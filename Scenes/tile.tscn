@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://byb3wjan8u1rx"]
 
-[ext_resource type="Texture2D" uid="uid://cdwcysljin2vi" path="res://Assets/iso_tile.png" id="1_bxljw"]
 [ext_resource type="Script" path="res://Scripts/tile.gd" id="1_ulwfg"]
+[ext_resource type="Texture2D" uid="uid://baldcqxtkften" path="res://Assets/iso_ground_tile.png" id="2_al1f2"]
 [ext_resource type="PackedScene" uid="uid://dtag84i2rw8vh" path="res://Scenes/player.tscn" id="3_6l0tj"]
 [ext_resource type="Texture2D" uid="uid://bavwh028kg0ak" path="res://Assets/iso_tile_hover.png" id="3_liu54"]
 [ext_resource type="Texture2D" uid="uid://dfi1c2dmop8x" path="res://Assets/fire_sprite-sheet.png" id="4_g0c6l"]
@@ -34,7 +34,7 @@ script = ExtResource("1_ulwfg")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(0, 8)
-texture = ExtResource("1_bxljw")
+texture = ExtResource("2_al1f2")
 
 [node name="Hover" type="Sprite2D" parent="."]
 visible = false
